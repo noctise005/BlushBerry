@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wishlist | BlushBerry</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+
+        body {
+            background: #fffafc;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================
+           NAVBAR
+           ========================= */
+
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+        }
+
+
+        .navbar-brand {
+            color: #f83f76;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+
+        .navbar-brand:hover {
+            color: #f83f76;
+        }
+
+
+        /* =========================
+           BUTTONS
+           ========================= */
+
+        .bb-btn {
+
+            display: inline-block;
+
+            background: #fffafc;
+
+            color: #f83f76;
+
+            border: 1.5px solid #f83f76;
+
+            padding: 10px 22px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition: all 0.2s ease;
+
+        }
+
+
+        .bb-btn:hover,
+        .bb-btn:active,
+        .bb-btn:focus {
+
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+
+            text-decoration: none;
+
+        }
+
+
+        /* =========================
+           WISHLIST CARD
+           ========================= */
+
+        .wishlist-card {
+
+            border: none;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            transition: .3s;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, .08);
+
+            height: 100%;
+
+        }
+
+
+        .wishlist-card:hover {
+
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, .12);
+
+        }
+
+
+        /* =========================
+           PRODUCT IMAGE
+           ========================= */
+
+        .wishlist-img {
+
+            width: 100%;
+
+            height: 250px;
+
+            object-fit: contain;
+
+            background: #fffafc;
+
+            padding: 10px;
+
+        }
+
+
+        /* =========================
+           PRICE
+           ========================= */
+
+        .price {
+
+            color: #f83f76;
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =========================
+           REMOVE BUTTON
+           ========================= */
+
+        .btn-remove {
+
+            background: #fffafc;
+
+            border: 1.5px solid #f83f76;
+
+            color: #f83f76;
+
+            border-radius: 12px;
+
+            padding: 10px 20px;
+
+            transition: all 0.2s ease;
+
+        }
+
+
+        .btn-remove:hover {
+
+            background: #f83f76;
+
+            color: white;
+
+        }
+
+
+        /* =========================
+           ADD TO CART
+           ========================= */
+
+        .btn-cart {
+
+            background: #fffafc;
+
+            border: 1.5px solid #f83f76;
+
+            color: #f83f76;
+
+            border-radius: 12px;
+
+            padding: 10px 20px;
+
+            transition: all 0.2s ease;
+
+        }
+
+
+        .btn-cart:hover {
+
+            background: #f83f76;
+
+            color: white;
+
+        }
+
+
+        /* =========================
+           EMPTY WISHLIST
+           ========================= */
+
+        .empty-wishlist {
+
+            text-align: center;
+
+            background: white;
+
+            padding: 50px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, .08);
+
+        }
+
+
+        .empty-wishlist h4 {
+
+            color: #f83f76;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+         ========================= -->
+
+    <nav class="navbar navbar-expand-lg">
+
+        <div class="container">
+
+
+            <a
+                class="navbar-brand"
+                href="index.html">
+
+                🌸BlushBerry
+
+            </a>
+
+
+            <div class="d-flex gap-2">
+
+
+                <a
+                    href="javascript:history.back()"
+                    class="bb-btn">
+
+                    ← Go Back
+
+                </a>
+
+
+                <a
+                    href="products.html"
+                    class="bb-btn">
+
+                    Continue Shopping
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         WISHLIST
+         ========================= -->
+
+    <div class="container mt-5">
+
+
+        <h2
+            class="mb-4"
+            style="color:#f83f76; font-weight:bold;">
+
+            ❤️ My Wishlist
+
+        </h2>
+
+
+        <div
+            class="row"
+            id="wishlistContainer">
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+         ========================= -->
+
+    <script>
+
+
+        const wishlistContainer =
+            document.getElementById(
+                "wishlistContainer"
+            );
+
+
+        /* =========================
+           GET WISHLIST
+           ========================= */
+
+        let wishlist =
+            JSON.parse(
+                localStorage.getItem("wishlist")
+            ) || [];
+
+
+
+        /* =========================
+           LOAD WISHLIST PRODUCTS
+           ========================= */
+
+        async function loadWishlist() {
+
+
+            /* EMPTY WISHLIST */
+
+            if (wishlist.length === 0) {
+
+                wishlistContainer.innerHTML = `
+
+                    <div class="col-12">
+
+                        <div class="empty-wishlist">
+
+                            <h4>
+                                ❤️ Your Wishlist is Empty
+                            </h4>
+
+                            <p>
+                                Add your favourite products
+                                by clicking the heart.
+                            </p>
+
+                            <a
+                                href="products.html"
+                                class="bb-btn">
+
+                                Start Shopping
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            try {
+
+
+                /* GET PRODUCTS */
+
+                const response =
+                    await fetch(
+                        "http://localhost:8080/api/products"
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load products"
+                    );
+
+                }
+
+
+                const products =
+                    await response.json();
+
+
+
+                /* FIND WISHLIST PRODUCTS */
+
+                const wishlistProducts =
+                    products.filter(
+                        product =>
+                            wishlist.includes(
+                                product.id
+                            )
+                    );
+
+
+                /* CLEAR */
+
+                wishlistContainer.innerHTML = "";
+
+
+
+                /* =========================
+                   DISPLAY PRODUCTS
+                   ========================= */
+
+                wishlistProducts.forEach(
+                    product => {
+
+
+                        /* IMAGE PATH */
+
+                        let imagePath;
+
+
+                        if (product.image) {
+
+
+                            if (
+                                product.image.startsWith(
+                                    "uploads/"
+                                )
+                            ) {
+
+                                imagePath =
+                                    "http://localhost:8080/" +
+                                    product.image;
+
+                            }
+
+                            else {
+
+                                imagePath =
+                                    "images/" +
+                                    product.image;
+
+                            }
+
+                        }
+
+                        else {
+
+                            imagePath =
+                                "images/default-product.jpg";
+
+                        }
+
+
+
+                        /* CARD */
+
+                        const card = `
+
+                            <div
+                                class="col-md-4 mb-4"
+                                id="wishlist-${product.id}">
+
+
+                                <div
+                                    class="card wishlist-card">
+
+
+                                    <img
+
+                                        src="${imagePath}"
+
+                                        class="wishlist-img"
+
+                                        alt="${product.name}"
+
+                                        onerror="
+                                            this.onerror=null;
+                                            this.src='images/default-product.jpg';
+                                        "
+
+                                    >
+
+
+                                    <div
+                                        class="card-body">
+
+
+                                        <h5>
+
+                                            ${product.name}
+
+                                        </h5>
+
+
+                                        <p
+                                            class="text-muted">
+
+                                            ${product.brand || ""}
+
+                                        </p>
+
+
+                                        <p
+                                            class="price">
+
+                                            ₹${product.price}
+
+                                        </p>
+
+
+                                        <button
+
+                                            class="btn btn-cart w-100 mb-2"
+
+                                            onclick="
+                                                addToCart(
+                                                    ${product.id}
+                                                )
+                                            ">
+
+                                            🛒 Add to Cart
+
+                                        </button>
+
+
+                                        <button
+
+                                            class="btn btn-remove w-100"
+
+                                            onclick="
+                                                removeFromWishlist(
+                                                    ${product.id}
+                                                )
+                                            ">
+
+                                            Remove from Wishlist
+
+                                        </button>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+
+                        wishlistContainer.innerHTML +=
+                            card;
+
+                    }
+                );
+
+
+                /* =========================
+                   CLEAN INVALID IDS
+                   ========================= */
+
+                const validIds =
+                    wishlistProducts.map(
+                        product => product.id
+                    );
+
+
+                wishlist =
+                    wishlist.filter(
+                        id =>
+                            validIds.includes(id)
+                    );
+
+
+                localStorage.setItem(
+                    "wishlist",
+                    JSON.stringify(wishlist)
+                );
+
+
+                /* IF EVERYTHING WAS INVALID */
+
+                if (
+                    wishlistProducts.length === 0
+                ) {
+
+                    wishlistContainer.innerHTML = `
+
+                        <div class="col-12">
+
+                            <div class="empty-wishlist">
+
+                                <h4>
+                                    ❤️ Your Wishlist is Empty
+                                </h4>
+
+                                <p>
+                                    Add your favourite
+                                    products from the Shop.
+                                </p>
+
+                                <a
+                                    href="products.html"
+                                    class="bb-btn">
+
+                                    Start Shopping
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Error loading wishlist:",
+                    error
+                );
+
+
+                wishlistContainer.innerHTML = `
+
+                    <div class="col-12">
+
+                        <div class="empty-wishlist">
+
+                            <h4>
+                                ❌ Unable to Load Wishlist
+                            </h4>
+
+                            <p>
+                                Please make sure
+                                Spring Boot is running.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+
+        /* =========================
+           ADD TO CART
+           ========================= */
+
+        async function addToCart(productId) {
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        "http://localhost:8080/api/products"
+                    );
+
+
+                const products =
+                    await response.json();
+
+
+                const product =
+                    products.find(
+                        p => p.id === productId
+                    );
+
+
+                if (!product) {
+
+                    alert(
+                        "Product not found."
+                    );
+
+                    return;
+
+                }
+
+
+                let cart =
+                    JSON.parse(
+                        localStorage.getItem("cart")
+                    ) || [];
+
+
+                const existing =
+                    cart.find(
+                        item =>
+                            item.id === product.id
+                    );
+
+
+                if (existing) {
+
+                    existing.quantity =
+                        (existing.quantity || 1) + 1;
+
+                }
+
+                else {
+
+                    cart.push({
+
+                        ...product,
+
+                        quantity: 1
+
+                    });
+
+                }
+
+
+                localStorage.setItem(
+                    "cart",
+                    JSON.stringify(cart)
+                );
+
+
+                alert(
+                    product.name +
+                    " added to cart!"
+                );
+
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Unable to add product to cart."
+                );
+
+            }
+
+        }
+
+
+
+        /* =========================
+           REMOVE FROM WISHLIST
+           ========================= */
+
+        function removeFromWishlist(
+            productId
+        ) {
+
+
+            wishlist =
+                wishlist.filter(
+                    id =>
+                        id !== productId
+                );
+
+
+            localStorage.setItem(
+                "wishlist",
+                JSON.stringify(wishlist)
+            );
+
+
+            const card =
+                document.getElementById(
+                    "wishlist-" + productId
+                );
+
+
+            if (card) {
+
+                card.remove();
+
+            }
+
+
+            /* CHECK EMPTY */
+
+            if (wishlist.length === 0) {
+
+                loadWishlist();
+
+            }
+
+        }
+
+
+
+        /* =========================
+           LOAD
+           ========================= */
+
+        loadWishlist();
+
+    </script>
+
+
+    <script src="js/theme.js"></script>
+
+</body>
+
+</html>

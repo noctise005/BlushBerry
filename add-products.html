@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Product | BlushBerry</title>
+
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+
+    <style>
+
+        /* =========================
+           BODY
+           ========================= */
+
+        body {
+
+            background: #fffafc;
+
+            font-family: Arial, sans-serif;
+
+        }
+
+
+        /* =========================
+           CONTAINER
+           ========================= */
+
+        .container {
+
+            max-width: 800px;
+
+        }
+
+
+        /* =========================
+           TOP BAR
+           ========================= */
+
+        .top-bar {
+
+            margin-top: 30px;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        /* =========================
+           GO BACK BUTTON
+           ========================= */
+
+        .back-btn {
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #fffafc;
+
+            color: #f83f76;
+
+            border: 1.5px solid #f83f76;
+
+            padding: 10px 22px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            transition: all 0.2s ease;
+
+        }
+
+
+        .back-btn:hover {
+
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+
+            text-decoration: none;
+
+        }
+
+
+        .back-btn:active {
+
+            background: #f83f76;
+
+            color: white;
+
+        }
+
+
+        .back-btn:focus {
+
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+
+            outline: none;
+
+            box-shadow:
+                0 0 0 3px rgba(248, 63, 118, 0.20);
+
+        }
+
+
+        /* =========================
+           FORM BOX
+           ========================= */
+
+        .form-box {
+
+            background: white;
+
+            padding: 30px;
+
+            margin-top: 20px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, .08);
+
+        }
+
+
+        /* =========================
+           TITLE
+           ========================= */
+
+        h2 {
+
+            text-align: center;
+
+            color: #f83f76;
+
+            font-weight: bold;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* =========================
+           LABELS
+           ========================= */
+
+        label {
+
+            font-weight: 600;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        /* =========================
+           INPUTS
+           ========================= */
+
+        .form-control:focus,
+        .form-select:focus {
+
+            border-color: #f83f76;
+
+            box-shadow:
+                0 0 0 3px rgba(248, 63, 118, 0.15);
+
+        }
+
+
+        /* =========================
+           ADD PRODUCT BUTTON
+           ========================= */
+
+        .btn-add {
+
+            background: #f83f76;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 11px;
+
+            font-weight: 600;
+
+            transition: all 0.2s ease;
+
+        }
+
+
+        .btn-add:hover {
+
+            background: #f83f76;
+
+            color: white;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        .btn-add:active {
+
+            background: #f83f76;
+
+            color: white;
+
+        }
+
+
+        .btn-add:focus {
+
+            background: #f83f76;
+
+            color: white;
+
+            box-shadow:
+                0 0 0 3px rgba(248, 63, 118, 0.20);
+
+        }
+
+
+        /* =========================
+           FILE INPUT
+           ========================= */
+
+        .form-control[type="file"] {
+
+            padding: 10px;
+
+        }
+
+
+        /* =========================
+           MESSAGE
+           ========================= */
+
+        #message {
+
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            font-weight: 500;
+
+        }
+
+
+        .success-message {
+
+            background: #eafaf0;
+
+            color: #198754;
+
+        }
+
+
+        .error-message {
+
+            background: #fff0f3;
+
+            color: #dc3545;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <!-- =========================
+             GO BACK
+             ========================= -->
+
+        <div class="top-bar">
+
+            <a href="admin-dashboard.html"
+               class="back-btn">
+
+                ← Go Back
+
+            </a>
+
+        </div>
+
+
+
+        <!-- =========================
+             FORM
+             ========================= -->
+
+        <div class="form-box">
+
+
+            <h2>
+
+                Add New Product
+
+            </h2>
+
+
+
+            <form id="addProductForm">
+
+
+                <!-- PRODUCT NAME -->
+
+                <div class="mb-3">
+
+                    <label for="productName">
+
+                        Product Name
+
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="productName"
+                        placeholder="Enter product name"
+                        required>
+
+                </div>
+
+
+
+                <!-- BRAND -->
+
+                <div class="mb-3">
+
+                    <label for="brand">
+
+                        Brand
+
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="brand"
+                        placeholder="Enter brand name"
+                        required>
+
+                </div>
+
+
+
+                <!-- CATEGORY -->
+
+                <div class="mb-3">
+
+                    <label for="category">
+
+                        Category
+
+                    </label>
+
+
+                    <select
+                        class="form-select"
+                        id="category"
+                        required>
+
+                        <option value="Skincare">
+                            Skincare
+                        </option>
+
+                        <option value="Makeup">
+                            Makeup
+                        </option>
+
+                        <option value="Hair Care">
+                            Hair Care
+                        </option>
+
+                        <option value="Sunscreen">
+                            Sunscreen
+                        </option>
+
+                        <option value="Lip Care">
+                            Lip Care
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- PRICE -->
+
+                <div class="mb-3">
+
+                    <label for="price">
+
+                        Price (₹)
+
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="price"
+                        min="1"
+                        step="0.01"
+                        placeholder="Enter price"
+                        required>
+
+                </div>
+
+
+
+                <!-- IMAGE -->
+
+                <div class="mb-3">
+
+                    <label for="imageFile">
+
+                        Product Image
+
+                    </label>
+
+
+                    <input
+                        type="file"
+                        class="form-control"
+                        id="imageFile"
+                        accept="image/*"
+                        required>
+
+
+                    <small class="text-muted">
+
+                        Choose a product image from your computer.
+
+                    </small>
+
+                </div>
+
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="btn btn-add w-100"
+                    id="addProductButton">
+
+                    Add Product
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- MESSAGE -->
+
+            <div id="message"></div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+         ========================= -->
+
+    <script>
+
+        const addProductForm =
+            document.getElementById("addProductForm");
+
+
+        const addProductButton =
+            document.getElementById("addProductButton");
+
+
+        const message =
+            document.getElementById("message");
+
+
+
+        /* =========================
+           SHOW MESSAGE
+           ========================= */
+
+        function showMessage(text, type) {
+
+            message.textContent = text;
+
+            message.className = "";
+
+            message.classList.add(
+                type === "success"
+                    ? "success-message"
+                    : "error-message"
+            );
+
+            message.style.display = "block";
+
+        }
+
+
+
+        /* =========================
+           ADD PRODUCT
+           ========================= */
+
+        addProductForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                /* =========================
+                   GET FORM VALUES
+                   ========================= */
+
+                const productName =
+                    document
+                        .getElementById("productName")
+                        .value
+                        .trim();
+
+
+                const brand =
+                    document
+                        .getElementById("brand")
+                        .value
+                        .trim();
+
+
+                const category =
+                    document
+                        .getElementById("category")
+                        .value;
+
+
+                const price =
+                    parseFloat(
+                        document
+                            .getElementById("price")
+                            .value
+                    );
+
+
+                const imageFile =
+                    document
+                        .getElementById("imageFile")
+                        .files[0];
+
+
+
+                /* =========================
+                   VALIDATION
+                   ========================= */
+
+                if (!productName ||
+                    !brand ||
+                    !category ||
+                    !price ||
+                    !imageFile) {
+
+                    showMessage(
+                        "Please fill all fields.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+
+                /* =========================
+                   DISABLE BUTTON
+                   ========================= */
+
+                addProductButton.disabled = true;
+
+                addProductButton.textContent =
+                    "Uploading Image...";
+
+
+
+                try {
+
+
+                    /* =========================
+                       STEP 1
+                       UPLOAD IMAGE
+                       ========================= */
+
+                    const formData =
+                        new FormData();
+
+
+                    formData.append(
+                        "file",
+                        imageFile
+                    );
+
+
+                    const uploadResponse =
+                        await fetch(
+                            "http://localhost:8080/api/products/upload-image",
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
+
+
+                    if (!uploadResponse.ok) {
+
+                        throw new Error(
+                            "Image upload failed."
+                        );
+
+                    }
+
+
+                    const uploadResult =
+                        await uploadResponse.json();
+
+
+                    /*
+                     * Support different possible
+                     * response formats.
+                     */
+
+                    let imagePath;
+
+
+                    if (
+                        typeof uploadResult === "string"
+                    ) {
+
+                        imagePath =
+                            uploadResult;
+
+                    }
+
+                    else {
+
+                        imagePath =
+                            uploadResult.image ||
+                            uploadResult.path ||
+                            uploadResult.fileName ||
+                            uploadResult.filename;
+
+                    }
+
+
+                    if (!imagePath) {
+
+                        throw new Error(
+                            "Image path was not returned by server."
+                        );
+
+                    }
+
+
+
+                    /* =========================
+                       STEP 2
+                       SAVE PRODUCT
+                       ========================= */
+
+                    addProductButton.textContent =
+                        "Saving Product...";
+
+
+                    const product = {
+
+                        name: productName,
+
+                        brand: brand,
+
+                        category: category,
+
+                        price: price,
+
+                        image: imagePath
+
+                    };
+
+
+                    const productResponse =
+                        await fetch(
+                            "http://localhost:8080/api/products",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json"
+
+                                },
+
+                                body:
+                                    JSON.stringify(product)
+
+                            }
+                        );
+
+
+                    if (!productResponse.ok) {
+
+                        throw new Error(
+                            "Failed to save product."
+                        );
+
+                    }
+
+
+                    const savedProduct =
+                        await productResponse.json();
+
+
+                    console.log(
+                        "Saved Product:",
+                        savedProduct
+                    );
+
+
+
+                    /* =========================
+                       SUCCESS
+                       ========================= */
+
+                    showMessage(
+                        "Product added successfully! 🎉",
+                        "success"
+                    );
+
+
+                    addProductForm.reset();
+
+
+                    addProductButton.textContent =
+                        "Add Product";
+
+
+                    addProductButton.disabled =
+                        false;
+
+
+                }
+
+                catch (error) {
+
+
+                    console.error(
+                        "Error adding product:",
+                        error
+                    );
+
+
+                    showMessage(
+                        "Unable to add product. Please make sure Spring Boot is running.",
+                        "error"
+                    );
+
+
+                    addProductButton.textContent =
+                        "Add Product";
+
+
+                    addProductButton.disabled =
+                        false;
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+    <script src="js/theme.js"></script>
+
+
+</body>
+
+</html>

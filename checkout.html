@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout |🌸BlushBerry</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #fffafc;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+        }
+
+        .navbar-brand {
+
+            color: #ff4f87;
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+        }
+
+
+        .navbar-brand:hover {
+
+            color: #ff2d73;
+
+        }
+
+        .checkout-box,
+        .summary-box {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+        }
+
+        .btn-place {
+            background: #ff4f87;
+            color: white;
+            border: none;
+        }
+
+        .btn-place:hover {
+            background: #ff2d73;
+            color: white;
+        }
+
+        .bb-btn {
+            display: inline-block;
+            background: #ff4f87;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 79, 135, 0.25);
+        }
+
+        .bb-btn:hover {
+            background: #ff2d73;
+            color: white;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        /* Go Back button */
+        .bb-back-btn {
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #fffafc;
+
+            color: #f83f76;
+
+            border: 1.5px solid #f83f76;
+
+            padding: 10px 22px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            transition: all 0.2s ease;
+
+        }
+
+
+        .bb-back-btn:hover {
+
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+
+            text-decoration: none;
+
+        }
+
+
+        .bb-back-btn:active {
+
+            background: #f83f76;
+
+            color: white;
+
+        }
+
+
+        .bb-back-btn:focus {
+
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+
+            outline: none;
+
+            box-shadow:
+                0 0 0 3px rgba(248, 63, 118, 0.20);
+
+        }
+
+
+        /* Larger Go Back button */
+        .bb-back-large {
+            padding: 14px 32px;
+            font-size: 18px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">
+                🌸BlushBerry
+            </a>
+
+            <a href="cart.html" class="bb-btn bb-back-btn"> ← Go Back </a>
+
+        </div>
+
+    </nav>
+
+    <div class="container mt-5">
+
+        <div class="row">
+
+            <div class="col-lg-8">
+
+                <div class="checkout-box">
+
+                    <h3>Shipping Details</h3>
+
+                    <hr>
+
+                    <div class="mb-3">
+                        <label>Full Name</label>
+                        <input type="text" class="form-control" id="customerName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Mobile Number</label>
+                        <input type="text" class="form-control" id="mobileNumber">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Delivery Address</label>
+                        <textarea class="form-control" rows="3" id="address"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>City</label>
+                        <input type="text" class="form-control" id="city">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Pincode</label>
+                        <input type="text" class="form-control" id="pincode">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Payment Method</label>
+
+                        <select class="form-select" id="paymentMethod">
+
+                            <option>UPI</option>
+                            <option>Google Pay</option>
+                            <option>PhonePe</option>
+                            <option>Paytm</option>
+                            <option>Credit/Debit Card</option>
+                            <option>Cash on Delivery</option>
+
+                        </select>
+
+                    </div>
+
+                    <button class="btn btn-place w-100" id="placeOrderBtn">
+                        Place Order
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-4">
+
+                <div class="summary-box">
+
+                    <h4>Order Summary</h4>
+
+                    <hr>
+
+                    <div id="checkoutItems"></div>
+
+                    <hr>
+
+                    <p>
+                        Subtotal
+                        <span class="float-end" id="checkoutSubtotal">₹0</span>
+                    </p>
+
+                    <p>
+                        Shipping
+                        <span class="float-end text-success">FREE</span>
+                    </p>
+
+                    <hr>
+
+                    <h4>
+                        Total
+                        <span class="float-end" id="checkoutTotal">₹0</span>
+                    </h4>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        const checkoutItems = document.getElementById("checkoutItems");
+        const checkoutSubtotal = document.getElementById("checkoutSubtotal");
+        const checkoutTotal = document.getElementById("checkoutTotal");
+
+
+        function displayCheckout() {
+
+            checkoutItems.innerHTML = "";
+
+            if (cart.length === 0) {
+
+                checkoutItems.innerHTML =
+                    "<p class='text-center'>Your cart is empty.</p>";
+
+                checkoutSubtotal.textContent = "₹0";
+                checkoutTotal.textContent = "₹0";
+
+                return;
+            }
+
+
+            let subtotal = 0;
+
+
+            cart.forEach(product => {
+
+                const quantity = product.quantity || 1;
+
+                const itemTotal = product.price * quantity;
+
+                subtotal += itemTotal;
+
+
+                checkoutItems.innerHTML += `
+                <p>
+                    ${product.name}
+                    <span class="float-end">
+                        ₹${itemTotal}
+                    </span>
+                </p>
+            `;
+
+            });
+
+
+            checkoutSubtotal.textContent = "₹" + subtotal;
+            checkoutTotal.textContent = "₹" + subtotal;
+
+        }
+
+
+        displayCheckout();
+
+        // Place Order
+        const placeOrderBtn = document.getElementById("placeOrderBtn");
+
+        placeOrderBtn.addEventListener("click", function () {
+
+            const order = {
+                customerName: document.getElementById("customerName").value,
+                mobileNumber: document.getElementById("mobileNumber").value,
+                email: document.getElementById("email").value,
+                address: document.getElementById("address").value,
+                city: document.getElementById("city").value,
+                pincode: document.getElementById("pincode").value,
+                paymentMethod: document.getElementById("paymentMethod").value,
+
+                productName: cart.length > 0 ? cart[0].name : "",
+                productImage: cart.length > 0 ? cart[0].image : "",
+
+                totalAmount: cart.reduce((total, product) => {
+                    return total + product.price * (product.quantity || 1);
+                }, 0)
+            };
+
+            fetch("http://localhost:8080/api/orders", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(order)
+            })
+                .then(response => {
+
+                    if (!response.ok) {
+                        throw new Error("Failed to place order");
+                    }
+
+                    return response.json();
+                })
+                .then(data => {
+
+                    alert("Order placed successfully! 🎉");
+
+                    localStorage.removeItem("cart");
+
+                    window.location.href = "index.html";
+
+                })
+                .catch(error => {
+
+                    console.error("Order error:", error);
+
+                    alert("Unable to place order. Please try again.");
+
+                });
+
+        });
+
+    </script>
+    <script src="js/theme.js"></script>
+
+</body>
+
+</html>

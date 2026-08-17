@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | BlushBerry</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #fffafc;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+        }
+
+        .navbar-brand {
+
+            color: #ff4f87;
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+        }
+
+
+        .navbar-brand:hover {
+
+            color: #ff2d73;
+
+        }
+
+        .cart-box {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+        }
+
+        .product-img {
+            width: 90px;
+            border-radius: 10px;
+        }
+
+        .price {
+            color: #ff4f87;
+            font-weight: bold;
+        }
+
+        .total-box {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+        }
+
+        .btn-checkout {
+            background: #ff4f87;
+            color: white;
+            border: none;
+        }
+
+        .btn-checkout:hover {
+            background: #ff2d73;
+            color: white;
+        }
+
+    
+        .bb-btn {
+            display: inline-block;
+            background: #ff4f87;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 79, 135, 0.25);
+        }
+
+        .bb-btn:hover {
+            background: #ff2d73;
+            color: white;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        /* Go Back button */
+        .bb-back-btn {
+            margin-top: 25px;
+            margin-left: 20px;
+        }
+
+        /* Larger Go Back button */
+        .bb-back-large {
+            padding: 14px 32px;
+            font-size: 18px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">
+                🌸BlushBerry
+            </a>
+
+            <a href="products.html" class="bb-btn"> Continue Shopping </a>
+
+        </div>
+
+    </nav>
+
+    <div class="container mt-5">
+
+        <h2 class="mb-4">🛒 Shopping Cart</h2>
+
+        <div class="row">
+
+            <div class="col-lg-8">
+
+                <div class="cart-box">
+
+                    <table class="table align-middle">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Product</th>
+
+                                <th>Name</th>
+
+                                <th>Price</th>
+
+                                <th>Qty</th>
+
+                                <th>Total</th>
+
+                                <th></th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="cartItems">
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="total-box">
+
+                    <h4>Order Summary</h4>
+
+                    <hr>
+
+                    <p>
+                        Subtotal
+                        <span class="float-end" id="subtotal">₹0</span>
+                    </p>
+
+                    <p>
+                        Shipping
+                        <span class="float-end">Free</span>
+                    </p>
+
+                    <h5>
+                        Total
+                        <span class="float-end" id="total">₹0</span>
+                    </h5>
+                    <hr>
+
+                    <a href="checkout.html" class="btn btn-checkout w-100">
+                        Proceed to Checkout
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        const cartItems = document.getElementById("cartItems");
+        const subtotalElement = document.getElementById("subtotal");
+        const totalElement = document.getElementById("total");
+
+
+        function displayCart() {
+
+            cartItems.innerHTML = "";
+
+            if (cart.length === 0) {
+
+                cartItems.innerHTML = `
+                <tr>
+                    <td colspan="6" class="text-center">
+                        Your cart is empty.
+                    </td>
+                </tr>
+            `;
+
+                subtotalElement.textContent = "₹0";
+                totalElement.textContent = "₹0";
+
+                return;
+            }
+
+
+            let subtotal = 0;
+
+
+            cart.forEach((product, index) => {
+
+                const quantity = product.quantity || 1;
+
+                subtotal += product.price * quantity;
+
+
+                const row = `
+                <tr>
+
+                    <td>
+                        <img src="${product.image && product.image.startsWith("uploads/")
+                        ? "http://localhost:8080/" + product.image : "images/" + product.image}"
+                        class="product-img" alt="${product.name}">
+                    </td>
+
+                    <td>
+                        ${product.name}
+                    </td>
+
+                    <td class="price">
+                        ₹${product.price}
+                    </td>
+
+                    <td>
+                        <input 
+                            type="number"
+                            value="${quantity}"
+                            min="1"
+                            class="form-control"
+                            style="width:80px;"
+                            oninput="updateQuantity(${index}, this.value)">
+                    </td>
+
+                    <td class="price">
+                        ₹${product.price * quantity}
+                    </td>
+
+                    <td>
+                        <button
+                            class="btn btn-danger btn-sm"
+                            onclick="removeFromCart(${index})">
+                            Remove
+                        </button>
+                    </td>
+
+                </tr>
+            `;
+
+                cartItems.innerHTML += row;
+
+            });
+
+
+            subtotalElement.textContent = "₹" + subtotal;
+            totalElement.textContent = "₹" + subtotal;
+
+        }
+
+
+        function removeFromCart(index) {
+
+            cart.splice(index, 1);
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            displayCart();
+
+        }
+
+
+        function updateQuantity(index, quantity) {
+
+            quantity = parseInt(quantity);
+
+            if (quantity < 1 || isNaN(quantity)) {
+                quantity = 1;
+            }
+
+            cart[index].quantity = quantity;
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            displayCart();
+
+        }
+
+
+        displayCart();
+
+    </script>
+    <script src="js/theme.js"></script>
+</body>
+
+</html>

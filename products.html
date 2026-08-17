@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shop | BlushBerry</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+
+        body {
+            background: #fffafc;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================
+           NAVBAR
+           ========================= */
+
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+        }
+
+        .navbar-brand {
+            color: #f83f76;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .navbar-brand:hover {
+            color: #f83f76;
+        }
+
+
+        /* =========================
+           SEARCH BAR
+           ========================= */
+
+        .search-box {
+            width: 430px;
+            height: 45px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            padding: 0 18px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: #f83f76;
+            box-shadow: 0 0 0 3px rgba(248, 63, 118, 0.12);
+        }
+
+
+        /* =========================
+           CATEGORY BUTTONS
+           ========================= */
+
+        .category-btn {
+            margin: 5px;
+            border-radius: 12px !important;
+        }
+
+
+        /* =========================
+           PRODUCT CARD
+           ========================= */
+
+        .product-card {
+            position: relative;
+
+            height: 100%;
+
+            border: none;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.08);
+
+            background: white;
+
+            transition: .3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+
+        /* =========================
+           PRODUCT IMAGE
+           ========================= */
+
+        .product-card .card-img-top {
+            width: 100%;
+
+            height: 260px;
+
+            object-fit: contain;
+
+            background: #fffafc;
+
+            padding: 5px;
+        }
+
+
+        /* =========================
+           PRODUCT CONTENT
+           ========================= */
+
+        .product-card .card-body {
+            display: flex;
+
+            flex-direction: column;
+
+            height: 100%;
+
+            padding: 20px;
+        }
+
+
+        /* =========================
+           PRODUCT NAME
+           ========================= */
+
+        .product-card h5 {
+            min-height: 50px;
+
+            margin-bottom: 10px;
+
+            font-size: 20px;
+        }
+
+
+        /* =========================
+           RATING
+           ========================= */
+
+        .product-card .rating {
+            margin-bottom: 10px;
+
+            color: #f5b642;
+        }
+
+
+        /* =========================
+           PRICE
+           ========================= */
+
+        .product-card .price {
+            font-size: 22px;
+
+            font-weight: bold;
+
+            color: #f83f76;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           BLUSHBERRY BUTTONS
+           ========================= */
+
+        .bb-btn {
+
+            display: inline-block;
+
+            background: #fffafc;
+
+            color: #f83f76;
+
+            border: 1.5px solid #f83f76;
+
+            padding: 10px 22px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition: all 0.2s ease;
+
+            box-shadow: none;
+        }
+
+
+        .bb-btn:hover {
+
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+
+            transform: none;
+
+            text-decoration: none;
+        }
+
+
+        .bb-btn:active {
+
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+        }
+
+
+        .bb-btn:focus {
+
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+
+            box-shadow:
+                0 0 0 3px rgba(248, 63, 118, 0.20);
+        }
+
+
+        /* Add to Cart button */
+
+        .product-card .bb-btn {
+
+            width: 100%;
+
+            margin-top: auto;
+        }
+
+
+        /* =========================
+           WISHLIST HEART
+           ========================= */
+
+        .wishlist-heart {
+
+            position: absolute;
+
+            top: 12px;
+
+            right: 12px;
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            border: none;
+
+            background: rgba(255, 255, 255, 0.95);
+
+            color: #f83f76;
+
+            font-size: 23px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+
+            z-index: 5;
+
+            box-shadow:
+                0 3px 10px rgba(0, 0, 0, 0.12);
+
+            transition: 0.2s ease;
+        }
+
+
+        .wishlist-heart:hover {
+
+            transform: scale(1.12);
+
+            background: #f83f76;
+
+            color: white;
+        }
+
+
+        .wishlist-heart.active {
+
+            background: #f83f76;
+
+            color: white;
+        }
+
+
+        /* =========================
+           NAVBAR BUTTON GROUP
+           ========================= */
+
+        .nav-buttons {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+           ========================= */
+
+        @media (max-width: 992px) {
+
+            .search-box {
+                width: 320px;
+            }
+
+        }
+
+
+        @media (max-width: 768px) {
+
+            .navbar .container {
+                flex-wrap: wrap;
+            }
+
+
+            .navbar-brand {
+                margin-bottom: 10px;
+            }
+
+
+            .navbar-controls {
+
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+
+                margin-top: 10px;
+            }
+
+
+            .search-box {
+                width: 280px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+         ========================= -->
+
+    <nav class="navbar navbar-expand-lg">
+
+        <div class="container">
+
+
+            <a
+                class="navbar-brand"
+                href="index.html">
+
+                🌸BlushBerry
+
+            </a>
+
+
+            <div
+                class="ms-auto d-flex align-items-center navbar-controls">
+
+
+                <!-- SEARCH -->
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="form-control search-box me-2"
+                    placeholder="Search products...">
+
+
+                <!-- BUTTONS -->
+
+                <div class="nav-buttons">
+
+
+                    <a
+                        href="cart.html"
+                        class="bb-btn">
+
+                        Cart 🛒
+
+                    </a>
+
+
+                    <a
+                        href="index.html"
+                        class="bb-btn">
+
+                        ← Go Back
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         CATEGORY BUTTONS
+         ========================= -->
+
+    <div class="container mt-4 text-center">
+
+
+        <button
+            id="allBtn"
+            class="bb-btn category-btn">
+
+            All
+
+        </button>
+
+
+        <button
+            id="skinBtn"
+            class="bb-btn category-btn">
+
+            Skincare
+
+        </button>
+
+
+        <button
+            id="makeupBtn"
+            class="bb-btn category-btn">
+
+            Makeup
+
+        </button>
+
+
+        <button
+            id="hairBtn"
+            class="bb-btn category-btn">
+
+            Hair Care
+
+        </button>
+
+
+        <button
+            id="sunBtn"
+            class="bb-btn category-btn">
+
+            Sunscreen
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         PRODUCTS
+         ========================= -->
+
+    <div class="container mt-5">
+
+        <div
+            class="row"
+            id="productContainer">
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+         ========================= -->
+
+    <script>
+
+
+        /* =========================
+           ELEMENTS
+           ========================= */
+
+        const productContainer =
+            document.getElementById("productContainer");
+
+
+        const allBtn =
+            document.getElementById("allBtn");
+
+
+        const skinBtn =
+            document.getElementById("skinBtn");
+
+
+        const makeupBtn =
+            document.getElementById("makeupBtn");
+
+
+        const hairBtn =
+            document.getElementById("hairBtn");
+
+
+        const sunBtn =
+            document.getElementById("sunBtn");
+
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+
+
+        /* =========================
+           VARIABLES
+           ========================= */
+
+        let allProducts = [];
+
+        let currentCategory = "all";
+
+
+        /* =========================
+           WISHLIST
+           ========================= */
+
+        let wishlist =
+            JSON.parse(
+                localStorage.getItem("wishlist")
+            ) || [];
+
+
+
+        /* =========================
+           LOAD PRODUCTS
+           ========================= */
+
+        fetch("http://localhost:8080/api/products")
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Server error: " +
+                        response.status
+                    );
+
+                }
+
+                return response.json();
+
+            })
+
+            .then(products => {
+
+                allProducts = products;
+
+
+                /*
+                 * Check category from homepage
+                 */
+
+                const params =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+
+                const selectedCategory =
+                    params.get("category");
+
+
+                if (selectedCategory) {
+
+                    currentCategory =
+                        selectedCategory
+                            .toLowerCase()
+                            .trim();
+
+                }
+
+
+                filterProducts();
+
+            })
+
+            .catch(error => {
+
+                console.error(
+                    "Error loading products:",
+                    error
+                );
+
+
+                productContainer.innerHTML = `
+
+                    <p class="text-center text-danger">
+
+                        Unable to load products.
+
+                    </p>
+
+                `;
+
+            });
+
+
+
+        /* =========================
+           DISPLAY PRODUCTS
+           ========================= */
+
+        function displayProducts(products) {
+
+
+            productContainer.innerHTML = "";
+
+
+            if (products.length === 0) {
+
+                productContainer.innerHTML = `
+
+                    <p class="text-center text-danger">
+
+                        No products found.
+
+                    </p>
+
+                `;
+
+                return;
+
+            }
+
+
+            products.forEach(product => {
+
+
+                /* =========================
+                   IMAGE PATH
+                   ========================= */
+
+                let imagePath = "";
+
+
+                if (product.image) {
+
+
+                    if (
+                        product.image.startsWith(
+                            "uploads/"
+                        )
+                    ) {
+
+                        imagePath =
+                            "http://localhost:8080/" +
+                            product.image;
+
+                    }
+
+                    else {
+
+                        imagePath =
+                            "images/" +
+                            product.image;
+
+                    }
+
+                }
+
+                else {
+
+                    imagePath =
+                        "images/default-product.jpg";
+
+                }
+
+
+                /* =========================
+                   WISHLIST STATE
+                   ========================= */
+
+                const isWishlisted =
+                    wishlist.includes(product.id);
+
+
+                const heartSymbol =
+                    isWishlisted
+                        ? "♥"
+                        : "♡";
+
+
+                const heartClass =
+                    isWishlisted
+                        ? "wishlist-heart active"
+                        : "wishlist-heart";
+
+
+                const heartTitle =
+                    isWishlisted
+                        ? "Remove from Wishlist"
+                        : "Add to Wishlist";
+
+
+                /* =========================
+                   PRODUCT CARD
+                   ========================= */
+
+                const productCard = `
+
+                    <div
+                        class="col-md-3 mb-4 product">
+
+
+                        <div
+                            class="card product-card">
+
+
+                            <!-- WISHLIST HEART -->
+
+                            <button
+
+                                class="${heartClass}"
+
+                                id="heart-${product.id}"
+
+                                onclick="
+                                    toggleWishlist(
+                                        ${product.id},
+                                        this
+                                    )
+                                "
+
+                                title="${heartTitle}"
+
+                            >
+
+                                ${heartSymbol}
+
+                            </button>
+
+
+                            <!-- PRODUCT IMAGE -->
+
+                            <img
+
+                                src="${imagePath}"
+
+                                class="card-img-top"
+
+                                alt="${product.name}"
+
+                                onerror="
+                                    this.onerror=null;
+                                    this.src='images/default-product.jpg';
+                                "
+
+                            >
+
+
+                            <!-- PRODUCT DETAILS -->
+
+                            <div
+                                class="card-body">
+
+
+                                <h5>
+
+                                    ${product.name}
+
+                                </h5>
+
+
+                                <p
+                                    class="rating">
+
+                                    ⭐⭐⭐⭐⭐
+
+                                </p>
+
+
+                                <p
+                                    class="price">
+
+                                    ₹${product.price}
+
+                                </p>
+
+
+                                <button
+
+                                    class="bb-btn"
+
+                                    onclick="
+                                        addToCart(
+                                            ${product.id}
+                                        )
+                                    "
+
+                                >
+
+                                    Add to Cart
+
+                                </button>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                productContainer.innerHTML +=
+                    productCard;
+
+            });
+
+        }
+
+
+
+        /* =========================
+           ADD TO CART
+           ========================= */
+
+        function addToCart(productId) {
+
+
+            const product =
+                allProducts.find(
+                    p => p.id === productId
+                );
+
+
+            if (!product) {
+
+                alert(
+                    "Product not found."
+                );
+
+                return;
+
+            }
+
+
+            let cart =
+                JSON.parse(
+                    localStorage.getItem("cart")
+                ) || [];
+
+
+            const existingProduct =
+                cart.find(
+                    item =>
+                        item.id === product.id
+                );
+
+
+            if (existingProduct) {
+
+                existingProduct.quantity =
+                    (existingProduct.quantity || 1) + 1;
+
+            }
+
+            else {
+
+                cart.push({
+
+                    ...product,
+
+                    quantity: 1
+
+                });
+
+            }
+
+
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(cart)
+            );
+
+
+            alert(
+                product.name +
+                " added to cart!"
+            );
+
+        }
+
+
+
+        /* =========================
+           TOGGLE WISHLIST
+           ========================= */
+
+        function toggleWishlist(
+            productId,
+            button
+        ) {
+
+
+            const index =
+                wishlist.indexOf(productId);
+
+
+            /* ADD */
+
+            if (index === -1) {
+
+                wishlist.push(productId);
+
+
+                button.innerHTML = "♥";
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                button.title =
+                    "Remove from Wishlist";
+
+            }
+
+
+            /* REMOVE */
+
+            else {
+
+                wishlist.splice(
+                    index,
+                    1
+                );
+
+
+                button.innerHTML = "♡";
+
+
+                button.classList.remove(
+                    "active"
+                );
+
+
+                button.title =
+                    "Add to Wishlist";
+
+            }
+
+
+            /* SAVE */
+
+            localStorage.setItem(
+                "wishlist",
+                JSON.stringify(wishlist)
+            );
+
+        }
+
+
+
+        /* =========================
+           FILTER PRODUCTS
+           ========================= */
+
+        function filterProducts() {
+
+
+            const searchText =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const filteredProducts =
+                allProducts.filter(
+                    product => {
+
+
+                        const category =
+                            (
+                                product.category ||
+                                ""
+                            )
+                                .toLowerCase()
+                                .trim();
+
+
+                        const productName =
+                            (
+                                product.name ||
+                                ""
+                            )
+                                .toLowerCase();
+
+
+                        const brand =
+                            (
+                                product.brand ||
+                                ""
+                            )
+                                .toLowerCase();
+
+
+                        /* CATEGORY */
+
+                        let categoryMatch = true;
+
+
+                        if (
+                            currentCategory !==
+                            "all"
+                        ) {
+
+                            categoryMatch =
+                                category ===
+                                currentCategory;
+
+                        }
+
+
+                        /* SEARCH */
+
+                        const searchMatch =
+
+                            productName.includes(
+                                searchText
+                            )
+
+                            ||
+
+                            brand.includes(
+                                searchText
+                            );
+
+
+                        return (
+                            categoryMatch &&
+                            searchMatch
+                        );
+
+                    }
+                );
+
+
+            displayProducts(
+                filteredProducts
+            );
+
+        }
+
+
+
+        /* =========================
+           CATEGORY BUTTONS
+           ========================= */
+
+        allBtn.onclick = function () {
+
+            currentCategory =
+                "all";
+
+            filterProducts();
+
+        };
+
+
+        skinBtn.onclick = function () {
+
+            currentCategory =
+                "skincare";
+
+            filterProducts();
+
+        };
+
+
+        makeupBtn.onclick = function () {
+
+            currentCategory =
+                "makeup";
+
+            filterProducts();
+
+        };
+
+
+        hairBtn.onclick = function () {
+
+            currentCategory =
+                "hair care";
+
+            filterProducts();
+
+        };
+
+
+        sunBtn.onclick = function () {
+
+            currentCategory =
+                "sunscreen";
+
+            filterProducts();
+
+        };
+
+
+
+        /* =========================
+           SEARCH
+           ========================= */
+
+        searchInput.addEventListener(
+            "keyup",
+            filterProducts
+        );
+
+
+    </script>
+
+
+    <script src="js/theme.js"></script>
+
+
+</body>
+
+</html>

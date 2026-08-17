@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment | BlushBerry</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        body {
+            background: #fff8fb;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================
+           NAVBAR
+           ========================= */
+
+        .navbar {
+            background: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .08);
+        }
+
+        .navbar-brand {
+            color: #f83f76;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .navbar-brand:hover {
+            color: #f83f76;
+        }
+
+
+        /* =========================
+           GO BACK BUTTON
+           ========================= */
+
+        .bb-back-btn {
+            display: inline-block;
+
+            background: #fff8fb;
+
+            color: #f83f76;
+
+            border: 1.5px solid #f83f76;
+
+            border-radius: 12px;
+
+            padding: 8px 15px;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition: all 0.2s ease;
+        }
+
+        .bb-back-btn:hover {
+            background: #f83f76;
+            color: white;
+            border-color: #f83f76;
+            text-decoration: none;
+        }
+
+        .bb-back-btn:active {
+            background: #f83f76;
+            color: white;
+            border-color: #f83f76;
+        }
+
+        .bb-back-btn:focus {
+            background: #f83f76;
+            color: white;
+            border-color: #f83f76;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(248, 63, 118, 0.20);
+        }
+
+
+        /* =========================
+           PAGE TITLE
+           ========================= */
+
+        .page-title {
+            text-align: center;
+
+            margin: 40px 0;
+
+            color: #f83f76;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           PAYMENT CARD
+           ========================= */
+
+        .payment-card {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 20px;
+
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+
+            margin-bottom: 25px;
+
+            transition: .3s;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+        }
+
+
+        /* =========================
+           DEFAULT BADGE
+           ========================= */
+
+        .default {
+            background: #f83f76;
+
+            color: white;
+
+            padding: 5px 15px;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           ACTION BUTTONS
+           ========================= */
+
+        .action-btn {
+            background: #fff8fb;
+
+            color: #f83f76;
+
+            border: 1.5px solid #f83f76;
+
+            border-radius: 12px;
+
+            padding: 10px 22px;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            margin-right: 10px;
+
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+        }
+
+        .action-btn:active {
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+        }
+
+        .action-btn:focus {
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+
+            outline: none;
+
+            box-shadow: 0 0 0 3px rgba(248, 63, 118, 0.20);
+        }
+
+
+        /* =========================
+           DELETE BUTTON
+           ========================= */
+
+        .delete-btn {
+            background: #fff8fb;
+
+            color: #f83f76;
+
+            border: 1.5px solid #f83f76;
+        }
+
+        .delete-btn:hover {
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+        }
+
+
+        /* =========================
+           ADD PAYMENT BUTTON
+           ========================= */
+
+        .add-btn {
+            background: #f83f76;
+
+            color: white;
+
+            padding: 14px 35px;
+
+            border-radius: 35px;
+
+            font-weight: bold;
+
+            border: none;
+
+            transition: all 0.2s ease;
+        }
+
+        .add-btn:hover {
+            background: #f83f76;
+
+            color: white;
+
+            transform: translateY(-1px);
+
+            box-shadow: 0 5px 12px rgba(248, 63, 118, 0.25);
+        }
+
+        .add-btn:active {
+            background: #f83f76;
+
+            color: white;
+
+            transform: translateY(0);
+        }
+
+        .add-btn:focus {
+            background: #f83f76;
+
+            color: white;
+
+            outline: none;
+
+            box-shadow: 0 0 0 3px rgba(248, 63, 118, 0.20);
+        }
+
+
+        /* =========================
+           EMPTY MESSAGE
+           ========================= */
+
+        .empty-message {
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+        }
+
+
+        /* =========================
+           FOOTER SPACE
+           ========================= */
+
+        .footer-space {
+            height: 50px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+     ========================= -->
+
+<nav class="navbar navbar-expand-lg">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="index.html">
+
+            🌸 BlushBerry
+
+        </a>
+
+
+        <a href="profile.html"
+           class="bb-back-btn">
+
+            ← Go Back
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     PAYMENT METHODS
+     ========================= -->
+
+<div class="container">
+
+    <h2 class="page-title">
+
+        💳 Payment Methods
+
+    </h2>
+
+
+    <!-- PAYMENT METHODS WILL APPEAR HERE -->
+
+    <div id="paymentContainer"></div>
+
+
+    <!-- ADD PAYMENT -->
+
+    <div class="text-center mt-5">
+
+        <button class="btn add-btn"
+                onclick="addPaymentMethod()">
+
+            <i class="fa-solid fa-plus"></i>
+
+            Add New Payment Method
+
+        </button>
+
+    </div>
+
+
+    <div class="footer-space"></div>
+
+</div>
+
+
+
+<script>
+
+
+// ======================================
+// LOAD PAYMENT METHODS
+// ======================================
+
+let payments =
+    JSON.parse(localStorage.getItem("paymentMethods")) || [];
+
+
+// ======================================
+// FIRST TIME DEFAULT DATA
+// ======================================
+
+if (payments.length === 0) {
+
+    payments = [
+
+        {
+            id: Date.now(),
+
+            type: "Card",
+
+            icon: "fa-regular fa-credit-card",
+
+            name: "Visa **** 4589",
+
+            details: "Card Holder: Lily Sharma",
+
+            extra: "Expiry: 08/29",
+
+            default: true
+        },
+
+        {
+            id: Date.now() + 1,
+
+            type: "UPI",
+
+            icon: "fa-solid fa-mobile-screen-button",
+
+            name: "UPI",
+
+            details: "lily@upi",
+
+            extra: "",
+
+            default: false
+        },
+
+        {
+            id: Date.now() + 2,
+
+            type: "Net Banking",
+
+            icon: "fa-solid fa-building-columns",
+
+            name: "Net Banking",
+
+            details: "State Bank of India",
+
+            extra: "",
+
+            default: false
+        }
+
+    ];
+
+    savePayments();
+
+}
+
+
+// ======================================
+// SAVE
+// ======================================
+
+function savePayments() {
+
+    localStorage.setItem(
+        "paymentMethods",
+        JSON.stringify(payments)
+    );
+
+}
+
+
+// ======================================
+// DISPLAY PAYMENTS
+// ======================================
+
+function displayPayments() {
+
+    const container =
+        document.getElementById("paymentContainer");
+
+    container.innerHTML = "";
+
+
+    if (payments.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-message">
+
+                <h4>
+                    💳 No Payment Methods
+                </h4>
+
+                <p>
+                    Add a payment method for easier checkout.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    payments.forEach((payment, index) => {
+
+        const card = `
+
+            <div class="payment-card">
+
+                <div class="d-flex justify-content-between">
+
+                    <h5>
+
+                        <i class="${payment.icon}"></i>
+
+                        ${payment.name}
+
+                    </h5>
+
+
+                    ${
+                        payment.default
+                        ? `<span class="default">Default</span>`
+                        : ""
+                    }
+
+                </div>
+
+
+                <p>
+                    ${payment.details}
+                </p>
+
+
+                ${
+                    payment.extra
+                    ? `<p>${payment.extra}</p>`
+                    : ""
+                }
+
+
+                <button
+                    class="btn action-btn"
+                    onclick="editPayment(${index})">
+
+                    ${
+                        payment.type === "Card"
+                        ? "Edit"
+                        : "Manage"
+                    }
+
+                </button>
+
+
+                <button
+                    class="btn action-btn delete-btn"
+                    onclick="deletePayment(${index})">
+
+                    Delete
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        container.innerHTML += card;
+
+    });
+
+}
+
+
+// ======================================
+// ADD PAYMENT METHOD
+// ======================================
+
+function addPaymentMethod() {
+
+    const type =
+        prompt(
+            "Enter payment method:\n\n" +
+            "1. Card\n" +
+            "2. UPI\n" +
+            "3. Net Banking"
+        );
+
+
+    if (!type) {
+        return;
+    }
+
+
+    let paymentType;
+
+
+    if (
+        type.toLowerCase() === "card" ||
+        type === "1"
+    ) {
+
+        paymentType = "Card";
+
+    }
+
+    else if (
+        type.toLowerCase() === "upi" ||
+        type === "2"
+    ) {
+
+        paymentType = "UPI";
+
+    }
+
+    else if (
+        type.toLowerCase() === "net banking" ||
+        type === "3"
+    ) {
+
+        paymentType = "Net Banking";
+
+    }
+
+    else {
+
+        alert("Invalid payment method.");
+
+        return;
+    }
+
+
+    let name;
+
+    let details;
+
+    let extra;
+
+    let icon;
+
+
+    // ======================================
+    // CARD
+    // ======================================
+
+    if (paymentType === "Card") {
+
+        const lastFour =
+            prompt("Enter last 4 digits of card:");
+
+        if (!lastFour) {
+            return;
+        }
+
+
+        const holder =
+            prompt("Enter card holder name:");
+
+        if (!holder) {
+            return;
+        }
+
+
+        const expiry =
+            prompt("Enter expiry (MM/YY):");
+
+        if (!expiry) {
+            return;
+        }
+
+
+        name =
+            "Visa **** " + lastFour;
+
+        details =
+            "Card Holder: " + holder;
+
+        extra =
+            "Expiry: " + expiry;
+
+        icon =
+            "fa-regular fa-credit-card";
+
+    }
+
+
+    // ======================================
+    // UPI
+    // ======================================
+
+    else if (paymentType === "UPI") {
+
+        const upi =
+            prompt("Enter UPI ID:");
+
+        if (!upi) {
+            return;
+        }
+
+
+        name = "UPI";
+
+        details = upi;
+
+        extra = "";
+
+        icon =
+            "fa-solid fa-mobile-screen-button";
+
+    }
+
+
+    // ======================================
+    // NET BANKING
+    // ======================================
+
+    else {
+
+        const bank =
+            prompt("Enter bank name:");
+
+        if (!bank) {
+            return;
+        }
+
+
+        name = "Net Banking";
+
+        details = bank;
+
+        extra = "";
+
+        icon =
+            "fa-solid fa-building-columns";
+
+    }
+
+
+    const newPayment = {
+
+        id: Date.now(),
+
+        type: paymentType,
+
+        icon: icon,
+
+        name: name,
+
+        details: details,
+
+        extra: extra,
+
+        default: payments.length === 0
+
+    };
+
+
+    payments.push(newPayment);
+
+    savePayments();
+
+    displayPayments();
+
+}
+
+
+// ======================================
+// EDIT / MANAGE
+// ======================================
+
+function editPayment(index) {
+
+    const payment =
+        payments[index];
+
+
+    // CARD
+
+    if (payment.type === "Card") {
+
+        const holder =
+            prompt(
+                "Enter card holder name:",
+                payment.details.replace(
+                    "Card Holder: ",
+                    ""
+                )
+            );
+
+
+        if (!holder) {
+            return;
+        }
+
+
+        const expiry =
+            prompt(
+                "Enter expiry (MM/YY):",
+                payment.extra.replace(
+                    "Expiry: ",
+                    ""
+                )
+            );
+
+
+        if (!expiry) {
+            return;
+        }
+
+
+        payment.details =
+            "Card Holder: " + holder;
+
+        payment.extra =
+            "Expiry: " + expiry;
+
+    }
+
+
+    // UPI
+
+    else if (payment.type === "UPI") {
+
+        const upi =
+            prompt(
+                "Enter UPI ID:",
+                payment.details
+            );
+
+
+        if (!upi) {
+            return;
+        }
+
+
+        payment.details = upi;
+
+    }
+
+
+    // NET BANKING
+
+    else {
+
+        const bank =
+            prompt(
+                "Enter bank name:",
+                payment.details
+            );
+
+
+        if (!bank) {
+            return;
+        }
+
+
+        payment.details = bank;
+
+    }
+
+
+    savePayments();
+
+    displayPayments();
+
+}
+
+
+// ======================================
+// DELETE
+// ======================================
+
+function deletePayment(index) {
+
+    const payment =
+        payments[index];
+
+
+    const confirmDelete =
+        confirm(
+            "Delete this payment method?"
+        );
+
+
+    if (!confirmDelete) {
+        return;
+    }
+
+
+    payments.splice(index, 1);
+
+
+    // Make first remaining payment default
+
+    if (payments.length > 0) {
+
+        payments.forEach(
+            (item, i) => {
+
+                item.default = i === 0;
+
+            }
+        );
+
+    }
+
+
+    savePayments();
+
+    displayPayments();
+
+}
+
+
+// ======================================
+// DISPLAY WHEN PAGE OPENS
+// ======================================
+
+displayPayments();
+
+
+</script>
+
+
+<script src="js/theme.js"></script>
+
+
+</body>
+
+</html>

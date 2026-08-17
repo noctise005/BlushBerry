@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blushberry | K-Beauty Store</title>
+
+
+    <!-- BOOTSTRAP -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+
+    <style>
+
+        body {
+            background: #fffafc;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        .BlushBerry {
+            width: 100%;
+            height: 800px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .navbar-brand {
+            color: #ff4f87;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+
+        .navbar-brand:hover {
+            color: #ff2d73;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, #ffe8f1, #ffffff);
+        }
+
+
+        .hero-img {
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+        }
+
+
+        .hero h1 {
+            font-size: 55px;
+            font-weight: bold;
+        }
+
+
+        .hero p {
+            font-size: 20px;
+            color: gray;
+        }
+
+
+        /* SHOP BUTTON */
+
+        .btn-shop {
+            background: #fffafc !important;
+            color: #f04478 !important;
+            border: 1.5px solid #f83f76 !important;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+
+        .btn-shop:hover,
+        .btn-shop:active,
+        .btn-shop:focus {
+            background: #f83f76 !important;
+            color: white !important;
+            border-color: #e89ab2 !important;
+        }
+
+
+        /* CARD */
+
+        .card {
+            border: none;
+            border-radius: 20px;
+            transition: 0.4s;
+        }
+
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+
+        .card-img-top {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+
+        /* SECTION TITLE */
+
+        .section-title {
+            text-align: center;
+            margin: 70px 0 40px;
+            color: #f83f76;
+            font-weight: bold;
+        }
+
+
+        /* TRENDING */
+
+        .trending-section {
+            background: #fff5f7;
+        }
+
+
+        .trending-section h2 {
+            color: #f83f76;
+            font-weight: bold;
+        }
+
+
+        .trend-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            height: 100%;
+            cursor: pointer;
+        }
+
+
+        .trend-card:hover {
+            transform: translateY(-8px);
+        }
+
+
+        .trend-card h4 {
+            color: #f83f76;
+            margin-bottom: 10px;
+        }
+
+
+        /* BEST SELLERS */
+
+        .best-sellers {
+            background: #fff;
+        }
+
+
+        .best-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+            height: 100%;
+        }
+
+
+        .best-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+
+        .best-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: contain;
+            background: #fffafc;
+            padding: 5px;
+        }
+
+
+        .best-card .badge {
+            float: right;
+            margin-bottom: 10px;
+        }
+
+
+        /* =========================================
+           BLUSHBERRY BUTTON
+           ========================================= */
+
+        .bb-btn {
+            display: inline-block;
+
+            background: #fffafc;
+
+            color: #f83f76;
+
+            border: 1.5px solid #f83f76;
+
+            padding: 10px 22px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition: all 0.2s ease;
+
+            box-shadow: none;
+        }
+
+
+        .bb-btn:hover,
+        .bb-btn:active,
+        .bb-btn:focus {
+
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+
+            text-decoration: none;
+        }
+
+
+        .bb-btn:focus {
+
+            box-shadow:
+                0 0 0 3px rgba(232, 154, 178, 0.20);
+        }
+
+
+        /* GO BACK */
+
+        .bb-back-btn {
+
+            margin-top: 25px;
+
+            margin-left: 20px;
+        }
+
+
+        .bb-back-large {
+
+            padding: 14px 32px;
+
+            font-size: 18px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+
+            background: #f83f76;
+
+            color: white;
+
+            padding: 25px;
+
+            text-align: center;
+
+            margin-top: 60px;
+        }
+
+
+        .admin-link {
+
+            color: #777;
+
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+
+        .admin-link:hover {
+
+            color: #f83f76;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         NAVBAR
+         ============================== -->
+
+    <nav class="navbar navbar-expand-lg">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">
+
+                🌸BlushBerry
+
+            </a>
+
+
+            <button
+                class="navbar-toggler"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="menu">
+
+                <ul class="navbar-nav ms-auto">
+
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="index.html">
+
+                            Home
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="products.html">
+
+                            Shop
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="products.html">
+
+                            Brands
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="about.html">
+
+                            About Us
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="wishlist.html">
+
+                            Wishlist
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="login.html">
+
+                            Login
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="profile.html">
+
+                            Profile
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="cart.html">
+
+                            Cart
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="contact.html">
+
+                            Contact Us
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ==============================
+         HERO
+         ============================== -->
+
+    <section class="hero">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+
+                <div class="col-md-6">
+
+                    <h1>
+
+                        Glow Like Seoul ✨
+
+                    </h1>
+
+
+                    <p>
+
+                        Discover authentic Korean skincare & beauty products.
+
+                    </p>
+
+
+                    <a href="products.html" class="bb-btn">
+
+                        Shop Now
+
+                    </a>
+
+                </div>
+
+
+                <div class="col-md-6 text-center">
+
+                    <img
+                        src="images/bb2.jpg"
+                        class="img-fluid rounded hero-img"
+                        alt="K-Beauty">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==============================
+         TRENDING IN KOREA
+         ============================== -->
+
+    <section class="trending-section py-5">
+
+        <div class="container">
+
+            <h2 class="text-center mb-4">
+
+                ✨ Trending in Korea
+
+            </h2>
+
+
+            <div class="row">
+
+
+                <div class="col-md-3 mb-4">
+
+                    <div
+                        class="trend-card"
+                        onclick="window.location.href='products.html?category=skincare'">
+
+                        <h4>
+
+                            🌸 Glass Skin
+
+                        </h4>
+
+
+                        <p>
+
+                            Achieve radiant, hydrated Korean skin.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-3 mb-4">
+
+                    <div
+                        class="trend-card"
+                        onclick="window.location.href='products.html?category=makeup'">
+
+                        <h4>
+
+                            💄 Soft Makeup
+
+                        </h4>
+
+
+                        <p>
+
+                            Natural Korean makeup looks.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-3 mb-4">
+
+                    <div
+                        class="trend-card"
+                        onclick="window.location.href='products.html?category=sunscreen'">
+
+                        <h4>
+
+                            ☀️ Sun Care
+
+                        </h4>
+
+
+                        <p>
+
+                            Lightweight SPF for everyday protection.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-3 mb-4">
+
+                    <div
+                        class="trend-card"
+                        onclick="window.location.href='products.html?category=hair'">
+
+                        <h4>
+
+                            💇 Hair Care
+
+                        </h4>
+
+
+                        <p>
+
+                            Healthy and shiny Korean hair routines.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==============================
+         BEST SELLERS
+         ============================== -->
+
+    <section class="best-sellers py-5">
+
+        <div class="container">
+
+            <h2 class="text-center mb-5">
+
+                🔥 Best Sellers
+
+            </h2>
+
+
+            <div class="row">
+
+
+                <!-- BEAUTY OF JOSEON -->
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="best-card">
+
+                        <span class="badge bg-danger">
+
+                            BEST SELLER
+
+                        </span>
+
+
+                        <img
+                            src="images/bestseller.jpg"
+                            class="img-fluid">
+
+
+                        <h5 class="mt-3">
+
+                            Beauty of Joseon Glow Serum
+
+                        </h5>
+
+
+                        <p>
+
+                            ₹1499
+
+                        </p>
+
+
+                        <a
+                            href="products.html"
+                            class="bb-btn">
+
+                            Shop Now
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- COSRX -->
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="best-card">
+
+                        <span class="badge bg-warning text-dark">
+
+                            HOT
+
+                        </span>
+
+
+                        <img
+                            src="images/hot.jpg"
+                            class="img-fluid">
+
+
+                        <h5 class="mt-3">
+
+                            COSRX Snail Cream
+
+                        </h5>
+
+
+                        <p>
+
+                            ₹1899
+
+                        </p>
+
+
+                        <a
+                            href="products.html"
+                            class="bb-btn">
+
+                            Shop Now
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ANUA -->
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="best-card">
+
+                        <span class="badge bg-success">
+
+                            NEW
+
+                        </span>
+
+
+                        <img
+                            src="images/new.jpg"
+                            class="img-fluid">
+
+
+                        <h5 class="mt-3">
+
+                            Anua Heartleaf Toner
+
+                        </h5>
+
+
+                        <p>
+
+                            ₹1299
+
+                        </p>
+
+
+                        <a
+                            href="products.html"
+                            class="bb-btn">
+
+                            Shop Now
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==============================
+         TRENDING PRODUCTS
+         ============================== -->
+
+    <h2 class="section-title">
+
+        Trending Products
+
+    </h2>
+
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <!-- BEAUTY OF JOSEON -->
+
+            <div class="col-md-3 mb-4">
+
+                <div class="card">
+
+                    <img
+                        src="images/serum.jpg"
+                        class="card-img-top"
+                        alt="Beauty of Joseon Serum">
+
+
+                    <div class="card-body">
+
+                        <h5>
+
+                            Beauty of Joseon Serum
+
+                        </h5>
+
+
+                        <h4>
+
+                            ₹1499
+
+                        </h4>
+
+
+                        <button
+                            class="bb-btn"
+                            onclick="addTrendingToCart(
+                                'trending-boj',
+                                'Beauty of Joseon Glow Serum',
+                                'Beauty of Joseon',
+                                'Skincare',
+                                1499,
+                                'serum.jpg'
+                            )">
+
+                            Add to Cart
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- COSRX -->
+
+            <div class="col-md-3 mb-4">
+
+                <div class="card">
+
+                    <img
+                        src="images/cream.jpg"
+                        class="card-img-top"
+                        alt="COSRX Snail Cream">
+
+
+                    <div class="card-body">
+
+                        <h5>
+
+                            COSRX Snail Cream
+
+                        </h5>
+
+
+                        <h4>
+
+                            ₹1899
+
+                        </h4>
+
+
+                        <button
+                            class="bb-btn"
+                            onclick="addTrendingToCart(
+                                'trending-cosrx',
+                                'COSRX Snail Cream',
+                                'COSRX',
+                                'Skincare',
+                                1899,
+                                'cream.jpg'
+                            )">
+
+                            Add to Cart
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ANUA -->
+
+            <div class="col-md-3 mb-4">
+
+                <div class="card">
+
+                    <img
+                        src="images/toner.jpg"
+                        class="card-img-top"
+                        alt="Anua Toner">
+
+
+                    <div class="card-body">
+
+                        <h5>
+
+                            Anua Toner
+
+                        </h5>
+
+
+                        <h4>
+
+                            ₹1299
+
+                        </h4>
+
+
+                        <button
+                            class="bb-btn"
+                            onclick="addTrendingToCart(
+                                'trending-anua',
+                                'Anua Heartleaf Toner',
+                                'Anua',
+                                'Skincare',
+                                1299,
+                                'toner.jpg'
+                            )">
+
+                            Add to Cart
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LANEIGE -->
+
+            <div class="col-md-3 mb-4">
+
+                <div class="card">
+
+                    <img
+                        src="images/lipmask1.jpg"
+                        class="card-img-top"
+                        alt="Laneige Lip Mask">
+
+
+                    <div class="card-body">
+
+                        <h5>
+
+                            Laneige Lip Mask
+
+                        </h5>
+
+
+                        <h4>
+
+                            ₹1699
+
+                        </h4>
+
+
+                        <button
+                            class="bb-btn"
+                            onclick="addTrendingToCart(
+                                'trending-laneige',
+                                'Laneige Lip Mask',
+                                'Laneige',
+                                'Lip Care',
+                                1699,
+                                'lipmask1.jpg'
+                            )">
+
+                            Add to Cart
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==============================
+         FOOTER
+         ============================== -->
+
+    <footer>
+
+        © 2026 BlushBerry | Discover Your Glow ✨
+
+    </footer>
+
+
+
+    <!-- BOOTSTRAP JS -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+
+    <!-- ==============================
+         TRENDING PRODUCT CART
+         ============================== -->
+
+    <script>
+
+        function addTrendingToCart(
+            id,
+            name,
+            brand,
+            category,
+            price,
+            image
+        ) {
+
+
+            /*
+             * Get existing cart
+             */
+
+            let cart =
+                JSON.parse(
+                    localStorage.getItem("cart")
+                ) || [];
+
+
+            /*
+             * Check whether product
+             * already exists
+             */
+
+            const existingProduct =
+                cart.find(
+                    item => item.id === id
+                );
+
+
+            /*
+             * If already in cart,
+             * increase quantity
+             */
+
+            if (existingProduct) {
+
+                existingProduct.quantity =
+                    (existingProduct.quantity || 1) + 1;
+
+            }
+
+
+            /*
+             * Otherwise add new product
+             */
+
+            else {
+
+                const product = {
+
+                    id: id,
+
+                    name: name,
+
+                    brand: brand,
+
+                    category: category,
+
+                    price: price,
+
+                    image: image,
+
+                    quantity: 1
+
+                };
+
+
+                cart.push(product);
+
+            }
+
+
+            /*
+             * Save cart
+             */
+
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(cart)
+            );
+
+
+            /*
+             * Success message
+             */
+
+            alert(
+                name +
+                " added to cart! 🛒"
+            );
+
+        }
+
+    </script>
+
+
+
+    <!-- THEME -->
+
+    <script src="js/theme.js"></script>
+
+
+
+    <!-- ADMIN LOGIN -->
+
+    <div class="text-center mt-4 mb-4">
+
+        <a
+            href="admin-login.html"
+            class="admin-link">
+
+            Admin Login
+
+        </a>
+
+    </div>
+
+
+</body>
+
+</html>

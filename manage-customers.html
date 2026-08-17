@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Customers | BlushBerry</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        /* =========================
+           BODY
+           ========================= */
+
+        body {
+            background: #fff8fb;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+           ========================= */
+
+        .container {
+            margin-top: 40px;
+            margin-bottom: 50px;
+        }
+
+
+        /* =========================
+           TOP BAR
+           ========================= */
+
+        .top-bar {
+            position: relative;
+            height: 75px;
+            margin-bottom: 45px;
+        }
+
+
+        /* GO BACK BUTTON */
+
+        .back-btn {
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #fffafc;
+
+            color: #f83f76;
+
+            border: 1.5px solid #f83f76;
+
+            padding: 10px 22px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            transition: all 0.2s ease;
+
+        }
+
+
+        .back-btn:hover {
+
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+
+            text-decoration: none;
+
+        }
+
+
+        .back-btn:active {
+
+            background: #f83f76;
+
+            color: white;
+
+        }
+
+
+        .back-btn:focus {
+
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+
+            outline: none;
+
+            box-shadow:
+                0 0 0 3px rgba(248, 63, 118, 0.20);
+
+        }
+
+        /* =========================
+           PAGE TITLE
+           ========================= */
+
+        .top-bar h2 {
+            text-align: center;
+
+            color: #ff4f87;
+
+            font-size: 42px;
+
+            font-weight: 700;
+
+            margin: 0;
+
+            line-height: 60px;
+
+            padding-top: 5px;
+
+            line-height: 1.3;
+        }
+
+
+        /* =========================
+           CUSTOMER BOX
+           ========================= */
+
+        .customer-box {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, .08);
+        }
+
+
+        /* =========================
+           VIEW BUTTON
+           ========================= */
+
+        .btn-view {
+            background: #ff7aa8;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 20px;
+
+            padding: 7px 18px;
+        }
+
+
+        .btn-view:hover {
+            background: #ff4f87;
+
+            color: white;
+        }
+
+
+        /* =========================
+           TABLE
+           ========================= */
+
+        table {
+            margin-bottom: 0;
+        }
+
+        th {
+            white-space: nowrap;
+        }
+
+        td {
+            vertical-align: middle;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         MAIN CONTAINER
+         ========================= -->
+
+    <div class="container">
+
+
+        <!-- =========================
+             TOP BAR
+             ========================= -->
+
+        <div class="top-bar">
+
+
+            <!-- GO BACK -->
+
+            <a href="admin-dashboard.html"
+               class="back-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Go Back
+
+            </a>
+
+
+            <!-- TITLE -->
+
+            <h2>
+                Manage Customers
+            </h2>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             CUSTOMER TABLE
+             ========================= -->
+
+        <div class="customer-box">
+
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Name</th>
+
+                            <th>Email</th>
+
+                            <th>Orders</th>
+
+                            <th>Status</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="customersTableBody">
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+         ========================= -->
+
+    <script>
+
+
+        const customersTableBody =
+            document.getElementById("customersTableBody");
+
+
+        let allCustomers = [];
+
+
+
+        // ==========================================
+        // LOAD CUSTOMERS FROM ORDERS
+        // ==========================================
+
+        function loadCustomers() {
+
+
+            fetch("http://localhost:8080/api/orders")
+
+
+                .then(response => {
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Failed to load customers"
+                        );
+
+                    }
+
+
+                    return response.json();
+
+                })
+
+
+                .then(orders => {
+
+
+                    const customerMap =
+                        new Map();
+
+
+
+                    // ==================================
+                    // CREATE UNIQUE CUSTOMERS
+                    // ==================================
+
+                    orders.forEach(order => {
+
+
+                        const email =
+                            order.email;
+
+
+                        if (!email) {
+
+                            return;
+
+                        }
+
+
+
+                        if (!customerMap.has(email)) {
+
+
+                            customerMap.set(
+                                email,
+                                {
+
+                                    id: order.id,
+
+                                    name:
+                                        order.customerName ||
+                                        "Unknown",
+
+                                    email:
+                                        order.email,
+
+                                    mobile:
+                                        order.mobileNumber ||
+                                        "Not available",
+
+                                    address:
+                                        order.address ||
+                                        "Not available",
+
+                                    city:
+                                        order.city ||
+                                        "Not available",
+
+                                    pincode:
+                                        order.pincode ||
+                                        "Not available",
+
+                                    orders: 1
+
+                                }
+                            );
+
+
+                        }
+
+
+                        else {
+
+
+                            customerMap
+                                .get(email)
+                                .orders++;
+
+
+                        }
+
+
+                    });
+
+
+
+                    // ==================================
+                    // CONVERT MAP TO ARRAY
+                    // ==================================
+
+                    allCustomers =
+                        Array.from(
+                            customerMap.values()
+                        );
+
+
+
+                    customersTableBody.innerHTML =
+                        "";
+
+
+
+                    // ==================================
+                    // NO CUSTOMERS
+                    // ==================================
+
+                    if (allCustomers.length === 0) {
+
+
+                        customersTableBody.innerHTML = `
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="text-center">
+
+                                    No customers found.
+
+                                </td>
+
+                            </tr>
+
+                        `;
+
+
+                        return;
+
+                    }
+
+
+
+                    // ==================================
+                    // DISPLAY CUSTOMERS
+                    // ==================================
+
+                    allCustomers.forEach(
+                        (customer, index) => {
+
+
+                            const row = `
+
+                                <tr>
+
+
+                                    <td>
+                                        ${index + 1}
+                                    </td>
+
+
+                                    <td>
+                                        ${customer.name}
+                                    </td>
+
+
+                                    <td>
+                                        ${customer.email}
+                                    </td>
+
+
+                                    <td>
+                                        ${customer.orders}
+                                    </td>
+
+
+                                    <td>
+
+                                        <span
+                                            class="badge bg-success">
+
+                                            Active
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <button
+                                            class="btn btn-view btn-sm"
+                                            onclick="viewCustomer('${customer.email}')">
+
+                                            <i class="fa-solid fa-eye"></i>
+
+                                            View
+
+                                        </button>
+
+                                    </td>
+
+
+                                </tr>
+
+                            `;
+
+
+                            customersTableBody.innerHTML +=
+                                row;
+
+
+                        }
+                    );
+
+
+                })
+
+
+                .catch(error => {
+
+
+                    console.error(
+                        "Error loading customers:",
+                        error
+                    );
+
+
+                    customersTableBody.innerHTML = `
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="text-center text-danger">
+
+                                <i class="fa-solid fa-circle-exclamation"></i>
+
+                                Unable to load customers.
+
+                                <br>
+
+                                <small>
+                                    Make sure Spring Boot is running.
+                                </small>
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+
+                });
+
+
+        }
+
+
+
+        // ==========================================
+        // VIEW CUSTOMER
+        // ==========================================
+
+        function viewCustomer(email) {
+
+
+            const customer =
+                allCustomers.find(
+                    c => c.email === email
+                );
+
+
+
+            if (!customer) {
+
+
+                alert(
+                    "Customer not found."
+                );
+
+
+                return;
+
+            }
+
+
+
+            alert(
+
+                "Customer Details\n\n" +
+
+                "Name: " +
+                customer.name +
+                "\n\n" +
+
+                "Email: " +
+                customer.email +
+                "\n\n" +
+
+                "Mobile: " +
+                customer.mobile +
+                "\n\n" +
+
+                "Address: " +
+                customer.address +
+                "\n\n" +
+
+                "City: " +
+                customer.city +
+                "\n\n" +
+
+                "Pincode: " +
+                customer.pincode +
+                "\n\n" +
+
+                "Total Orders: " +
+                customer.orders
+
+            );
+
+
+        }
+
+
+
+        // ==========================================
+        // LOAD CUSTOMERS WHEN PAGE OPENS
+        // ==========================================
+
+        loadCustomers();
+
+
+    </script>
+
+
+    <!-- THEME -->
+
+    <script src="js/theme.js"></script>
+
+
+</body>
+
+</html>
