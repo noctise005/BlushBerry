@@ -178,7 +178,7 @@
 
         function loadProducts() {
 
-            fetch("http://localhost:8080/api/products")
+            fetch("https://affectionate-spontaneity-production-044d.up.railway.app/api/products")
 
                 .then(response => {
 
@@ -222,7 +222,7 @@
 
                                 <img
                                 src="${product.image.startsWith('uploads/')
-                                ? 'http://localhost:8080/' + product.image
+                                ? 'https://affectionate-spontaneity-production-044d.up.railway.app/' + product.image
                                 : 'images/' + product.image}"
                                 alt="${product.name}" style=" 
                                 width:60px;
@@ -314,7 +314,7 @@
             }
 
 
-            fetch(`http://localhost:8080/api/products/${id}`, {
+            fetch(`https://affectionate-spontaneity-production-044d.up.railway.app/api/products/${id}`, {
 
                 method: "DELETE"
 
@@ -358,7 +358,7 @@
 
         function editProduct(id) {
 
-            fetch(`http://localhost:8080/api/products/${id}`)
+            fetch(`https://affectionate-spontaneity-production-044d.up.railway.app/api/products/${id}`)
 
                 .then(response => {
 
@@ -414,7 +414,7 @@
 
 
                     fetch(
-                        `http://localhost:8080/api/products/${id}`,
+                        `https://affectionate-spontaneity-production-044d.up.railway.app/api/products/${id}`,
                         {
 
                             method: "PUT",

@@ -304,7 +304,7 @@ const ordersContainer =
 
 function loadOrders() {
 
-    fetch("http://localhost:8080/api/orders")
+    fetch("https://affectionate-spontaneity-production-044d.up.railway.app/api/orders")
 
         .then(response => {
 
@@ -418,9 +418,8 @@ function loadOrders() {
 
                         ?
 
-                        "http://localhost:8080/" +
+                       "https://affectionate-spontaneity-production-044d.up.railway.app/" +
                         order.productImage
-
                         :
 
                         "images/" +

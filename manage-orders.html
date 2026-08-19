@@ -229,7 +229,7 @@
 
         function loadOrders() {
 
-            fetch("http://localhost:8080/api/orders")
+            fetch("https://affectionate-spontaneity-production-044d.up.railway.app/api/orders")
                 .then(response => {
 
                     if (!response.ok) {
@@ -352,7 +352,7 @@
             console.log("Updating:", orderId, status);
 
             fetch(
-                `http://localhost:8080/api/orders/${orderId}/status?status=${encodeURIComponent(status)}`,
+                `https://affectionate-spontaneity-production-044d.up.railway.app/api/orders/${orderId}/status?status=${encodeURIComponent(status)}`,
                 {
                     method: "PUT"
                 }
