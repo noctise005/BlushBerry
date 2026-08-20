@@ -7,16 +7,29 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Blushberry | K-Beauty Store</title>
+    <title>BlushBerry | K-Beauty Store</title>
 
 
     <!-- BOOTSTRAP -->
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
 
 
     <style>
+
+        /* =========================================
+           GENERAL
+           ========================================= */
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
 
         body {
             background: #fffafc;
@@ -24,15 +37,9 @@
         }
 
 
-        .BlushBerry {
-            width: 100%;
-            height: 800px;
-            object-fit: cover;
-            border-radius: 20px;
-        }
-
-
-        /* NAVBAR */
+        /* =========================================
+           NAVBAR
+           ========================================= */
 
         .navbar {
             background: white;
@@ -44,6 +51,7 @@
             color: #ff4f87;
             font-size: 30px;
             font-weight: bold;
+            white-space: nowrap;
         }
 
 
@@ -52,13 +60,60 @@
         }
 
 
-        /* HERO */
+        .navbar-toggler {
+            border-color: #f83f76;
+            padding: 6px 9px;
+        }
+
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(248, 63, 118, 0.15);
+        }
+
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23f83f76' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+
+        .navbar .nav-link {
+            color: #333;
+            font-weight: 500;
+            padding: 8px 12px;
+            transition: 0.2s;
+        }
+
+
+        .navbar .nav-link:hover {
+            color: #f83f76;
+        }
+
+
+        /* =========================================
+           HERO
+           ========================================= */
 
         .hero {
-            height: 90vh;
+            min-height: 90vh;
             display: flex;
             align-items: center;
             background: linear-gradient(to right, #ffe8f1, #ffffff);
+            padding: 50px 0;
+        }
+
+
+        .hero h1 {
+            font-size: 55px;
+            font-weight: bold;
+            line-height: 1.15;
+        }
+
+
+        .hero p {
+            font-size: 20px;
+            color: gray;
+            line-height: 1.6;
+            max-width: 550px;
         }
 
 
@@ -66,80 +121,69 @@
             width: 100%;
             max-width: 800px;
             height: 600px;
-        }
-
-
-        .hero h1 {
-            font-size: 55px;
-            font-weight: bold;
-        }
-
-
-        .hero p {
-            font-size: 20px;
-            color: gray;
-        }
-
-
-        /* SHOP BUTTON */
-
-        .btn-shop {
-            background: #fffafc !important;
-            color: #f04478 !important;
-            border: 1.5px solid #f83f76 !important;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 500;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-
-        .btn-shop:hover,
-        .btn-shop:active,
-        .btn-shop:focus {
-            background: #f83f76 !important;
-            color: white !important;
-            border-color: #e89ab2 !important;
-        }
-
-
-        /* CARD */
-
-        .card {
-            border: none;
-            border-radius: 20px;
-            transition: 0.4s;
-        }
-
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-
-        .card-img-top {
-            width: 100%;
-            height: 500px;
             object-fit: cover;
-            border-radius: 10px;
+            display: block;
+            margin: auto;
         }
 
 
-        /* SECTION TITLE */
+        /* =========================================
+           BLUSHBERRY BUTTON
+           ========================================= */
 
-        .section-title {
-            text-align: center;
-            margin: 70px 0 40px;
+        .bb-btn {
+
+            display: inline-block;
+
+            background: #fffafc;
+
             color: #f83f76;
-            font-weight: bold;
+
+            border: 1.5px solid #f83f76;
+
+            padding: 10px 22px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition: all 0.2s ease;
+
+            box-shadow: none;
+
         }
 
 
-        /* TRENDING */
+        .bb-btn:hover,
+        .bb-btn:active,
+        .bb-btn:focus {
+
+            background: #f83f76;
+
+            color: white;
+
+            border-color: #f83f76;
+
+            text-decoration: none;
+        }
+
+
+        .bb-btn:focus {
+
+            box-shadow:
+                0 0 0 3px rgba(232, 154, 178, 0.20);
+        }
+
+
+        /* =========================================
+           TRENDING IN KOREA
+           ========================================= */
 
         .trending-section {
             background: #fff5f7;
@@ -175,7 +219,15 @@
         }
 
 
-        /* BEST SELLERS */
+        .trend-card p {
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           BEST SELLERS
+           ========================================= */
 
         .best-sellers {
             background: #fff;
@@ -214,77 +266,64 @@
         }
 
 
+        .best-card h5 {
+            line-height: 1.4;
+        }
+
+
         /* =========================================
-           BLUSHBERRY BUTTON
+           SECTION TITLE
            ========================================= */
 
-        .bb-btn {
-            display: inline-block;
-
-            background: #fffafc;
-
+        .section-title {
+            text-align: center;
+            margin: 70px 0 40px;
             color: #f83f76;
-
-            border: 1.5px solid #f83f76;
-
-            padding: 10px 22px;
-
-            border-radius: 12px;
-
-            font-size: 16px;
-
-            font-weight: 500;
-
-            text-decoration: none;
-
-            cursor: pointer;
-
-            transition: all 0.2s ease;
-
-            box-shadow: none;
+            font-weight: bold;
         }
 
 
-        .bb-btn:hover,
-        .bb-btn:active,
-        .bb-btn:focus {
+        /* =========================================
+           TRENDING PRODUCT CARDS
+           ========================================= */
 
-            background: #f83f76;
-
-            color: white;
-
-            border-color: #f83f76;
-
-            text-decoration: none;
+        .card {
+            border: none;
+            border-radius: 20px;
+            transition: 0.4s;
+            overflow: hidden;
+            height: 100%;
         }
 
 
-        .bb-btn:focus {
-
-            box-shadow:
-                0 0 0 3px rgba(232, 154, 178, 0.20);
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
 
 
-        /* GO BACK */
-
-        .bb-back-btn {
-
-            margin-top: 25px;
-
-            margin-left: 20px;
+        .card-img-top {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
         }
 
 
-        .bb-back-large {
-
-            padding: 14px 32px;
-
-            font-size: 18px;
+        .card-body {
+            display: flex;
+            flex-direction: column;
         }
 
 
-        /* FOOTER */
+        .card-body .bb-btn {
+            margin-top: auto;
+        }
+
+
+        /* =========================================
+           FOOTER
+           ========================================= */
 
         footer {
 
@@ -315,6 +354,294 @@
             color: #f83f76;
         }
 
+
+        /* =========================================
+           TABLET
+           ========================================= */
+
+        @media (max-width: 991.98px) {
+
+            .navbar .nav-link {
+                padding: 10px 5px;
+            }
+
+
+            .hero {
+                min-height: auto;
+                padding: 60px 0;
+            }
+
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+
+            .hero-img {
+                height: 500px;
+            }
+
+
+            .card-img-top {
+                height: 400px;
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 767.98px) {
+
+            /* NAVBAR */
+
+            .navbar {
+                padding: 12px 0;
+            }
+
+
+            .navbar-brand {
+                font-size: 25px;
+            }
+
+
+            .navbar-collapse {
+                margin-top: 12px;
+            }
+
+
+            .navbar-nav {
+                text-align: center;
+                padding: 8px 0;
+            }
+
+
+            .navbar .nav-link {
+                padding: 9px 10px;
+                border-bottom: 1px solid #fff0f5;
+            }
+
+
+            .navbar .nav-item:last-child .nav-link {
+                border-bottom: none;
+            }
+
+
+            /* HERO */
+
+            .hero {
+                min-height: auto;
+                padding: 45px 0 55px;
+            }
+
+
+            .hero .row {
+                text-align: center;
+            }
+
+
+            .hero h1 {
+                font-size: 38px;
+                line-height: 1.2;
+                margin-bottom: 18px;
+            }
+
+
+            .hero p {
+                font-size: 17px;
+                line-height: 1.5;
+                margin: 0 auto 25px;
+            }
+
+
+            .hero-img {
+                height: auto;
+                max-height: 420px;
+                margin-top: 35px;
+                object-fit: cover;
+                border-radius: 18px;
+            }
+
+
+            /* BUTTON */
+
+            .bb-btn {
+                padding: 10px 18px;
+                font-size: 15px;
+            }
+
+
+            /* TRENDING */
+
+            .trending-section {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
+            }
+
+
+            .trending-section h2 {
+                font-size: 28px;
+            }
+
+
+            .trend-card {
+                padding: 22px 18px;
+            }
+
+
+            .trend-card h4 {
+                font-size: 21px;
+            }
+
+
+            .trend-card p {
+                font-size: 15px;
+            }
+
+
+            /* BEST SELLERS */
+
+            .best-sellers {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
+            }
+
+
+            .best-sellers h2 {
+                font-size: 28px;
+            }
+
+
+            .best-card {
+                padding: 18px;
+            }
+
+
+            .best-card img {
+                height: 240px;
+            }
+
+
+            /* TRENDING PRODUCTS */
+
+            .section-title {
+                font-size: 28px;
+                margin: 45px 0 30px;
+                padding: 0 15px;
+            }
+
+
+            .card-img-top {
+                height: 350px;
+                object-fit: cover;
+            }
+
+
+            .card-body {
+                padding: 18px;
+            }
+
+
+            .card-body h5 {
+                font-size: 19px;
+            }
+
+
+            .card-body h4 {
+                font-size: 21px;
+            }
+
+
+            /* FOOTER */
+
+            footer {
+                padding: 20px 15px;
+                margin-top: 40px;
+                font-size: 14px;
+            }
+
+
+            .admin-link {
+                font-size: 13px;
+            }
+
+        }
+
+
+        /* =========================================
+           SMALL PHONES
+           ========================================= */
+
+        @media (max-width: 575.98px) {
+
+            .container {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+
+            .navbar-brand {
+                font-size: 23px;
+            }
+
+
+            .hero {
+                padding: 35px 0 45px;
+            }
+
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+
+            .hero p {
+                font-size: 16px;
+            }
+
+
+            .hero-img {
+                max-height: 330px;
+                margin-top: 30px;
+            }
+
+
+            .trending-section h2,
+            .best-sellers h2,
+            .section-title {
+                font-size: 25px;
+            }
+
+
+            .trend-card {
+                padding: 20px 15px;
+            }
+
+
+            .best-card img {
+                height: 220px;
+            }
+
+
+            .card-img-top {
+                height: 300px;
+            }
+
+
+            .bb-btn {
+                padding: 9px 16px;
+                font-size: 14px;
+            }
+
+
+            footer {
+                font-size: 13px;
+            }
+
+        }
+
     </style>
 
 </head>
@@ -340,8 +667,12 @@
 
             <button
                 class="navbar-toggler"
+                type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#menu">
+                data-bs-target="#menu"
+                aria-controls="menu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
                 <span class="navbar-toggler-icon"></span>
 
@@ -532,7 +863,7 @@
             <div class="row">
 
 
-                <div class="col-md-3 mb-4">
+                <div class="col-md-3 col-sm-6 mb-4">
 
                     <div
                         class="trend-card"
@@ -556,7 +887,7 @@
                 </div>
 
 
-                <div class="col-md-3 mb-4">
+                <div class="col-md-3 col-sm-6 mb-4">
 
                     <div
                         class="trend-card"
@@ -580,7 +911,7 @@
                 </div>
 
 
-                <div class="col-md-3 mb-4">
+                <div class="col-md-3 col-sm-6 mb-4">
 
                     <div
                         class="trend-card"
@@ -604,7 +935,7 @@
                 </div>
 
 
-                <div class="col-md-3 mb-4">
+                <div class="col-md-3 col-sm-6 mb-4">
 
                     <div
                         class="trend-card"
@@ -669,7 +1000,8 @@
 
                         <img
                             src="images/bestseller.jpg"
-                            class="img-fluid">
+                            class="img-fluid"
+                            alt="Beauty of Joseon Glow Serum">
 
 
                         <h5 class="mt-3">
@@ -715,7 +1047,8 @@
 
                         <img
                             src="images/hot.jpg"
-                            class="img-fluid">
+                            class="img-fluid"
+                            alt="COSRX Snail Cream">
 
 
                         <h5 class="mt-3">
@@ -761,7 +1094,8 @@
 
                         <img
                             src="images/new.jpg"
-                            class="img-fluid">
+                            class="img-fluid"
+                            alt="Anua Heartleaf Toner">
 
 
                         <h5 class="mt-3">
@@ -817,7 +1151,7 @@
 
             <!-- BEAUTY OF JOSEON -->
 
-            <div class="col-md-3 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4">
 
                 <div class="card">
 
@@ -868,7 +1202,7 @@
 
             <!-- COSRX -->
 
-            <div class="col-md-3 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4">
 
                 <div class="card">
 
@@ -919,7 +1253,7 @@
 
             <!-- ANUA -->
 
-            <div class="col-md-3 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4">
 
                 <div class="card">
 
@@ -970,7 +1304,7 @@
 
             <!-- LANEIGE -->
 
-            <div class="col-md-3 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4">
 
                 <div class="card">
 

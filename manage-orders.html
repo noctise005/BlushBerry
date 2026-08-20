@@ -1,55 +1,97 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Manage Orders | BlushBerry</title>
 
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
+        /* =========================================
+           BODY
+           ========================================= */
+
         body {
             background: #fff8fb;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        .container {
-            margin-top: 40px;
-            margin-bottom: 50px;
+
+        /* =========================================
+           MAIN CONTAINER
+           ========================================= */
+
+        .main-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 40px auto 50px;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
-        /* ---------- Top Bar ---------- */
+
+        /* =========================================
+           TOP BAR
+           ========================================= */
 
         .top-bar {
             position: relative;
+            min-height: 70px;
             margin-bottom: 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .top-bar h2 {
-            text-align: center;
+
+        /* =========================================
+           PAGE TITLE
+           ========================================= */
+
+        .page-title {
             color: #ff4f87;
             font-size: 42px;
             font-weight: 700;
             margin: 0;
+            text-align: center;
         }
 
+
+        /* =========================================
+           GO BACK BUTTON
+           ========================================= */
+
         .back-btn {
-            display: inline-block;
+            position: absolute;
+            left: 0;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
             text-decoration: none;
+
             background: #fffafc;
             color: #f83f76;
+
             border: 1.5px solid #f83f76;
+
             padding: 10px 22px;
             border-radius: 12px;
+
             font-size: 16px;
             font-weight: 500;
+
             transition: all 0.2s ease;
         }
 
@@ -70,22 +112,72 @@
             color: white;
             border-color: #f83f76;
             outline: none;
+
             box-shadow:
                 0 0 0 3px rgba(248, 63, 118, 0.20);
         }
 
-        /* ---------- Table Box ---------- */
+
+        /* =========================================
+           ORDER BOX
+           ========================================= */
 
         .order-box {
             background: white;
+
             padding: 25px;
+
             border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.08);
+
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        table {
-            margin-bottom: 0;
+
+        /* =========================================
+           MOBILE SCROLL HINT
+           ========================================= */
+
+        .scroll-hint {
+            display: none;
+
+            color: #888;
+            font-size: 13px;
+
+            text-align: center;
+
+            margin-bottom: 12px;
         }
+
+
+        /* =========================================
+           TABLE RESPONSIVE WRAPPER
+           ========================================= */
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+
+            -webkit-overflow-scrolling: touch;
+        }
+
+
+        /* =========================================
+           TABLE
+           ========================================= */
+
+        table {
+            width: 100%;
+            min-width: 850px;
+            margin-bottom: 0 !important;
+        }
+
+
+        /* TABLE HEADER */
 
         thead {
             background: #ffe6ef;
@@ -94,108 +186,350 @@
         thead th {
             color: #444;
             font-weight: 600;
+
+            white-space: nowrap;
+
+            padding: 15px;
         }
 
-        .status {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 14px;
+
+        /* TABLE BODY */
+
+        tbody td {
+            vertical-align: middle;
+
+            padding: 14px 15px;
+
+            white-space: nowrap;
         }
 
-        .delivered {
-            background: #d4edda;
-            color: #155724;
+
+        /* =========================================
+           STATUS SELECT
+           ========================================= */
+
+        .status-select {
+            width: 135px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
         }
 
-        .processing {
-            background: #fff3cd;
-            color: #856404;
-        }
 
-        .shipped {
-            background: #cce5ff;
-            color: #004085;
-        }
-
-        /* ---------- Button ---------- */
+        /* =========================================
+           VIEW BUTTON
+           ========================================= */
 
         .btn-view {
             background: #ff7aa8;
             color: white;
+
+            border: none;
+            border-radius: 20px;
+
+            padding: 7px 18px;
+
+            transition: 0.2s ease;
         }
 
         .btn-view:hover {
             background: #ff5d8f;
             color: white;
+
+            transform: translateY(-1px);
         }
 
-        /* ---------- Responsive ---------- */
 
-        @media(max-width:768px) {
+        /* =========================================
+           TABLET
+           ========================================= */
+
+        @media (max-width: 992px) {
+
+            .main-container {
+                margin-top: 30px;
+                padding: 0 18px;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+
+            .order-box {
+                padding: 20px;
+            }
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 768px) {
+
+            .main-container {
+                margin-top: 20px;
+                margin-bottom: 30px;
+
+                padding: 0 12px;
+            }
+
+
+            /* TOP BAR */
 
             .top-bar {
+                min-height: auto;
+
                 display: flex;
                 flex-direction: column;
+
+                align-items: center;
+
                 gap: 15px;
+
+                margin-bottom: 25px;
             }
+
+
+            /* BACK BUTTON */
 
             .back-btn {
                 position: static;
-                transform: none;
+
                 align-self: flex-start;
+
+                padding: 9px 17px;
+
+                font-size: 14px;
+
+                border-radius: 10px;
             }
 
+
+            /* TITLE */
+
+            .page-title {
+                font-size: 30px;
+
+                line-height: 1.2;
+
+                width: 100%;
+            }
+
+
+            /* ORDER BOX */
+
+            .order-box {
+                padding: 12px;
+
+                border-radius: 15px;
+            }
+
+
+            /* SHOW SCROLL HINT */
+
+            .scroll-hint {
+                display: block;
+            }
+
+
+            /* TABLE */
+
+            table {
+                min-width: 800px;
+            }
+
+            thead th {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            tbody td {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+
+            /* STATUS */
+
+            .status-select {
+                width: 125px;
+            }
+
+
+            /* VIEW BUTTON */
+
+            .btn-view {
+                padding: 6px 14px;
+
+                font-size: 13px;
+            }
+        }
+
+
+        /* =========================================
+           SMALL MOBILE
+           ========================================= */
+
+        @media (max-width: 480px) {
+
+            .main-container {
+                padding: 0 10px;
+            }
+
+
+            .page-title {
+                font-size: 26px;
+            }
+
+
+            .back-btn {
+                font-size: 13px;
+
+                padding: 8px 14px;
+            }
+
+
+            .order-box {
+                padding: 10px;
+
+                border-radius: 14px;
+            }
+
+
+            .scroll-hint {
+                font-size: 12px;
+            }
         }
     </style>
 
 </head>
 
+
 <body>
 
-    <div class="container">
+
+    <!-- =========================================
+         MAIN CONTAINER
+         ========================================= -->
+
+    <div class="main-container">
+
+
+        <!-- =========================================
+             TOP BAR
+             ========================================= -->
 
         <div class="top-bar">
 
+
+            <!-- GO BACK -->
+
             <a href="admin-dashboard.html" class="back-btn">
 
-                <i class="fa-solid fa-arrow-left"></i> Go Back
+                <i class="fa-solid fa-arrow-left"></i>
+
+                <span>Go Back</span>
 
             </a>
 
-            <h2>Manage Orders</h2>
+
+            <!-- PAGE TITLE -->
+
+            <h2 class="page-title">
+                Manage Orders
+            </h2>
 
         </div>
 
 
+
+        <!-- =========================================
+             ORDER BOX
+             ========================================= -->
+
         <div class="order-box">
 
-            <table class="table table-hover align-middle">
 
-                <thead>
+            <!-- MOBILE SCROLL MESSAGE -->
 
-                    <tr>
+            <div class="scroll-hint">
 
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Product</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                <i class="fa-solid fa-arrows-left-right"></i>
 
-                    </tr>
+                Swipe left/right to view the complete table
 
-                </thead>
+            </div>
 
-                <tbody id="ordersTableBody">
 
-                </tbody>
 
-            </table>
+            <!-- =====================================
+                 RESPONSIVE TABLE
+                 ===================================== -->
+
+            <div class="table-responsive">
+
+
+                <table class="table table-hover align-middle">
+
+
+                    <!-- TABLE HEADER -->
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Order ID
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Product
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <!-- TABLE BODY -->
+
+                    <tbody id="ordersTableBody">
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
 
         </div>
 
     </div>
 
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
 
     <script>
 
@@ -205,19 +539,23 @@
         let allOrders = [];
 
 
-        // =========================
-        // LOAD ALL ORDERS
-        // =========================
+        /* =========================================
+           LOAD ALL ORDERS
+           ========================================= */
 
         function loadOrders() {
 
-            fetch("https://affectionate-spontaneity-production-044d.up.railway.app/api/orders")
+            fetch(
+                "https://affectionate-spontaneity-production-044d.up.railway.app/api/orders"
+            )
 
                 .then(response => {
 
                     if (!response.ok) {
 
-                        throw new Error("Failed to load orders");
+                        throw new Error(
+                            "Failed to load orders"
+                        );
 
                     }
 
@@ -225,11 +563,17 @@
 
                 })
 
+
                 .then(orders => {
 
                     allOrders = orders;
 
                     ordersTableBody.innerHTML = "";
+
+
+                    /* =================================
+                       NO ORDERS
+                       ================================= */
 
                     if (orders.length === 0) {
 
@@ -237,7 +581,19 @@
 
                         <tr>
 
-                            <td colspan="6" class="text-center">
+                            <td
+                                colspan="6"
+                                class="text-center py-4">
+
+                                <i
+                                    class="fa-solid fa-box-open"
+                                    style="
+                                        font-size:35px;
+                                        color:#ff4f87;
+                                    ">
+                                </i>
+
+                                <br><br>
 
                                 No orders found.
 
@@ -248,27 +604,45 @@
                     `;
 
                         return;
-
                     }
 
 
+                    /* =================================
+                       DISPLAY ORDERS
+                       ================================= */
+
                     orders.forEach(order => {
+
+                        const currentStatus =
+                            order.status || "Processing";
+
 
                         const row = `
 
                         <tr>
 
-                            <td>
 
-                                #${order.id}
-
-                            </td>
+                            <!-- ORDER ID -->
 
                             <td>
 
-                                ${order.customerName}
+                                <strong>
+                                    #${order.id}
+                                </strong>
 
                             </td>
+
+
+                            <!-- CUSTOMER -->
+
+                            <td>
+
+                                ${order.customerName || "Unknown"}
+
+                            </td>
+
+
+                            <!-- PRODUCT -->
 
                             <td>
 
@@ -276,41 +650,55 @@
 
                             </td>
 
+
+                            <!-- AMOUNT -->
+
                             <td>
 
-                                ₹${order.totalAmount}
+                                <strong>
+
+                                    ₹${order.totalAmount || 0}
+
+                                </strong>
 
                             </td>
+
+
+                            <!-- STATUS -->
 
                             <td>
 
                                 <select
+                                    class="form-select form-select-sm status-select"
+                                    onchange="updateOrderStatus(${order.id}, this.value)">
 
-                                    class="form-select form-select-sm"
-
-                                    onchange="updateOrderStatus(${order.id}, this.value)"
-
-                                    style="width: 130px;">
-
-                                    <option value="Processing"
-
-                                        ${order.status === "Processing" || !order.status ? "selected" : ""}>
+                                    <option
+                                        value="Processing"
+                                        ${currentStatus === "Processing"
+                                ? "selected"
+                                : ""}>
 
                                         Processing
 
                                     </option>
 
-                                    <option value="Shipped"
 
-                                        ${order.status === "Shipped" ? "selected" : ""}>
+                                    <option
+                                        value="Shipped"
+                                        ${currentStatus === "Shipped"
+                                ? "selected"
+                                : ""}>
 
                                         Shipped
 
                                     </option>
 
-                                    <option value="Delivered"
 
-                                        ${order.status === "Delivered" ? "selected" : ""}>
+                                    <option
+                                        value="Delivered"
+                                        ${currentStatus === "Delivered"
+                                ? "selected"
+                                : ""}>
 
                                         Delivered
 
@@ -320,13 +708,16 @@
 
                             </td>
 
+
+                            <!-- ACTION -->
+
                             <td>
 
                                 <button
-
                                     class="btn btn-view btn-sm"
-
                                     onclick="viewOrder(${order.id})">
+
+                                    <i class="fa-solid fa-eye"></i>
 
                                     View
 
@@ -334,9 +725,11 @@
 
                             </td>
 
+
                         </tr>
 
                     `;
+
 
                         ordersTableBody.innerHTML += row;
 
@@ -344,17 +737,36 @@
 
                 })
 
+
                 .catch(error => {
 
-                    console.error("Error loading orders:", error);
+                    console.error(
+                        "Error loading orders:",
+                        error
+                    );
+
 
                     ordersTableBody.innerHTML = `
 
                     <tr>
 
-                        <td colspan="6" class="text-center text-danger">
+                        <td
+                            colspan="6"
+                            class="text-center text-danger py-4">
+
+                            <i
+                                class="fa-solid fa-circle-exclamation">
+                            </i>
+
+                            <br>
 
                             Unable to load orders.
+
+                            <br>
+
+                            <small>
+                                Make sure the Railway backend is running.
+                            </small>
 
                         </td>
 
@@ -367,31 +779,42 @@
         }
 
 
-        // =========================
-        // UPDATE ORDER STATUS
-        // =========================
+
+        /* =========================================
+           UPDATE ORDER STATUS
+           ========================================= */
 
         function updateOrderStatus(orderId, status) {
 
-            console.log("Updating:", orderId, status);
+            console.log(
+                "Updating order:",
+                orderId,
+                status
+            );
+
+
+            const url =
+                "https://affectionate-spontaneity-production-044d.up.railway.app/api/orders/"
+                + orderId
+                + "/status?status="
+                + encodeURIComponent(status);
+
 
             fetch(
-
-                `https://affectionate-spontaneity-production-044d.up.railway.app/api/orders/${orderId}/status?status=${encodeURIComponent(status)}`,
-
+                url,
                 {
-
                     method: "PUT"
-
                 }
-
             )
+
 
                 .then(response => {
 
                     if (!response.ok) {
 
-                        throw new Error("Failed to update order status");
+                        throw new Error(
+                            "Failed to update order status"
+                        );
 
                     }
 
@@ -399,35 +822,39 @@
 
                 })
 
+
                 .then(updatedOrder => {
 
-                    console.log("Updated order:", updatedOrder);
+                    console.log(
+                        "Updated order:",
+                        updatedOrder
+                    );
+
 
                     alert(
-
-                        "Order status updated to " +
-
-                        updatedOrder.status +
-
-                        "!"
-
+                        "Order status updated to "
+                        + updatedOrder.status
+                        + "!"
                     );
+
 
                     loadOrders();
 
                 })
 
+
                 .catch(error => {
 
                     console.error(
-
                         "Error updating order status:",
-
                         error
-
                     );
 
-                    alert("Unable to update order status.");
+
+                    alert(
+                        "Unable to update order status."
+                    );
+
 
                     loadOrders();
 
@@ -436,30 +863,36 @@
         }
 
 
-        // =========================
-        // VIEW ORDER
-        // =========================
+
+        /* =========================================
+           VIEW ORDER
+           ========================================= */
 
         function viewOrder(id) {
 
             window.location.href =
-                "order-details.html?id=" +
-                id +
-                "&from=manage-orders";
+                "order-details.html?id="
+                + id
+                + "&from=manage-orders";
 
         }
 
 
-        // =========================
-        // START
-        // =========================
+
+        /* =========================================
+           LOAD PAGE
+           ========================================= */
 
         loadOrders();
 
     </script>
 
 
+
+    <!-- THEME -->
+
     <script src="js/theme.js"></script>
+
 
 </body>
 

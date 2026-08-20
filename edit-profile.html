@@ -8,64 +8,140 @@
 
     <title>Edit Profile | BlushBerry</title>
 
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
+        /* =========================
+           GENERAL
+           ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             background: #fff8fb;
             font-family: Arial, sans-serif;
+            margin: 0;
+            color: #444;
         }
+
+
+        /* =========================
+           NAVBAR
+           ========================= */
 
         .navbar {
             background: white;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, .08);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 14px 0;
         }
 
-         .navbar-brand {
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
 
+        .navbar-brand {
             color: #ff4f87;
-
             font-size: 30px;
-
             font-weight: bold;
-
+            text-decoration: none;
+            white-space: nowrap;
         }
-
 
         .navbar-brand:hover {
-
             color: #ff2d73;
-
         }
+
+
+        /* =========================
+           BACK BUTTON
+           ========================= */
 
         .back-btn {
-            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #fffafc;
+            color: #f83f76;
+
+            border: 1.5px solid #f83f76;
+
+            padding: 9px 18px;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+            font-weight: 500;
+
+            text-decoration: none;
+
+            transition: all 0.2s ease;
+
+            white-space: nowrap;
         }
+
+        .back-btn:hover {
+            background: #f83f76;
+            color: white;
+            border-color: #f83f76;
+        }
+
+        .back-btn:active {
+            background: #f83f76;
+            color: white;
+        }
+
+
+        /* =========================
+           PAGE TITLE
+           ========================= */
 
         .page-title {
             text-align: center;
-            margin: 40px 0;
+
+            margin: 40px 0 35px;
+
             color: #ff4f87;
+
             font-weight: bold;
+
+            font-size: 30px;
         }
+
+
+        /* =========================
+           PROFILE CARD
+           ========================= */
 
         .profile-edit-card {
 
             background: white;
 
+            width: 100%;
             max-width: 600px;
 
-            margin: auto;
+            margin: 0 auto;
 
             padding: 35px;
 
             border-radius: 25px;
 
-            box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
-
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
+
+
+        /* =========================
+           PROFILE IMAGE
+           ========================= */
 
         .profile-preview {
 
@@ -84,9 +160,39 @@
 
         }
 
+
+        /* =========================
+           FORM
+           ========================= */
+
         .form-label {
             font-weight: bold;
+            margin-bottom: 7px;
         }
+
+        .form-control {
+
+            border-radius: 10px;
+
+            padding: 11px 13px;
+
+            border: 1px solid #ddd;
+
+        }
+
+        .form-control:focus {
+
+            border-color: #ff4f87;
+
+            box-shadow:
+                0 0 0 3px rgba(255, 79, 135, 0.12);
+
+        }
+
+
+        /* =========================
+           SAVE BUTTON
+           ========================= */
 
         .save-btn {
 
@@ -102,6 +208,8 @@
 
             font-weight: bold;
 
+            transition: all 0.2s ease;
+
         }
 
         .save-btn:hover {
@@ -110,10 +218,188 @@
 
             color: white;
 
+            transform: translateY(-2px);
+
         }
+
+
+        /* =========================
+           FOOTER SPACE
+           ========================= */
 
         .footer-space {
             height: 60px;
+        }
+
+
+        /* =========================
+           TABLET
+           ========================= */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 12px 0;
+            }
+
+            .navbar-brand {
+                font-size: 25px;
+            }
+
+            .page-title {
+                font-size: 27px;
+                margin: 30px 0;
+            }
+
+            .profile-edit-card {
+                padding: 28px;
+                border-radius: 20px;
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 576px) {
+
+            /* Navbar */
+
+            .navbar .container {
+
+                padding-left: 15px;
+                padding-right: 15px;
+
+                gap: 10px;
+
+            }
+
+            .navbar-brand {
+
+                font-size: 21px;
+
+            }
+
+            .back-btn {
+
+                padding: 8px 12px;
+
+                font-size: 13px;
+
+                border-radius: 10px;
+
+            }
+
+
+            /* Page */
+
+            .page-title {
+
+                font-size: 24px;
+
+                margin: 25px 0;
+
+            }
+
+
+            /* Card */
+
+            .profile-edit-card {
+
+                padding: 22px 18px;
+
+                border-radius: 18px;
+
+            }
+
+
+            /* Profile picture */
+
+            .profile-preview {
+
+                width: 105px;
+                height: 105px;
+
+                border-width: 3px;
+
+                margin-bottom: 22px;
+
+            }
+
+
+            /* Form */
+
+            .form-label {
+
+                font-size: 14px;
+
+            }
+
+            .form-control {
+
+                font-size: 14px;
+
+                padding: 10px 12px;
+
+            }
+
+
+            /* Save button */
+
+            .save-btn {
+
+                width: 100%;
+
+                padding: 12px;
+
+                font-size: 15px;
+
+            }
+
+
+            .footer-space {
+
+                height: 40px;
+
+            }
+
+        }
+
+
+        /* =========================
+           VERY SMALL PHONES
+           ========================= */
+
+        @media (max-width: 380px) {
+
+            .navbar-brand {
+
+                font-size: 19px;
+
+            }
+
+            .back-btn {
+
+                font-size: 12px;
+
+                padding: 7px 10px;
+
+            }
+
+            .page-title {
+
+                font-size: 22px;
+
+            }
+
+            .profile-edit-card {
+
+                padding: 18px 15px;
+
+            }
+
         }
     </style>
 
@@ -123,9 +409,11 @@
 <body>
 
 
-    <!-- NAVBAR -->
+    <!-- =========================
+         NAVBAR
+         ========================= -->
 
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar">
 
         <div class="container">
 
@@ -133,13 +421,19 @@
                 🌸 BlushBerry
             </a>
 
-            <a href="profile.html"class="btn btn-outline-danger"style="border-radius:10px; padding:8px 15px;">
-                ← Go Back 
+            <a href="profile.html" class="back-btn">
+                ← Go Back
             </a>
+
         </div>
 
     </nav>
 
+
+
+    <!-- =========================
+         PAGE
+         ========================= -->
 
     <div class="container">
 
@@ -148,12 +442,16 @@
         </h2>
 
 
+        <!-- =========================
+             PROFILE CARD
+             ========================= -->
+
         <div class="profile-edit-card">
 
 
             <!-- PROFILE IMAGE -->
 
-            <img src="images/pfp.jpg" class="profile-preview" id="profilePreview" alt="Profile Picture">
+            <img src="images/pfp.jpg" class="profile-preview" id="profilePreview" alt=" ">
 
 
             <!-- NAME -->
@@ -222,7 +520,6 @@
 
             </div>
 
-
         </div>
 
     </div>
@@ -231,11 +528,17 @@
     <div class="footer-space"></div>
 
 
+
+    <!-- =========================
+         JAVASCRIPT
+         ========================= -->
+
     <script>
 
-        // ==============================
+
+        // =====================================
         // LOAD SAVED PROFILE
-        // ==============================
+        // =====================================
 
         window.onload = function () {
 
@@ -286,11 +589,12 @@
         };
 
 
-        // ==============================
+        // =====================================
         // PREVIEW NEW PROFILE PICTURE
-        // ==============================
+        // =====================================
 
-        document.getElementById("profileImage")
+        document
+            .getElementById("profileImage")
             .addEventListener("change", function () {
 
                 const file = this.files[0];
@@ -299,7 +603,9 @@
                     return;
                 }
 
+
                 const reader = new FileReader();
+
 
                 reader.onload = function (event) {
 
@@ -308,30 +614,51 @@
 
                 };
 
+
                 reader.readAsDataURL(file);
 
             });
 
 
-        // ==============================
+        // =====================================
         // SAVE PROFILE
-        // ==============================
+        // =====================================
 
         function saveProfile() {
 
+
             const name =
-                document.getElementById("profileName").value.trim();
+                document
+                    .getElementById("profileName")
+                    .value
+                    .trim();
+
 
             const email =
-                document.getElementById("profileEmail").value.trim();
+                document
+                    .getElementById("profileEmail")
+                    .value
+                    .trim();
+
 
             const phone =
-                document.getElementById("profilePhone").value.trim();
+                document
+                    .getElementById("profilePhone")
+                    .value
+                    .trim();
 
 
-            if (name === "" || email === "" || phone === "") {
+            // Validation
 
-                alert("Please fill all profile details.");
+            if (
+                name === "" ||
+                email === "" ||
+                phone === ""
+            ) {
+
+                alert(
+                    "Please fill all profile details."
+                );
 
                 return;
 
@@ -345,10 +672,12 @@
                 name
             );
 
+
             localStorage.setItem(
                 "profileEmail",
                 email
             );
+
 
             localStorage.setItem(
                 "profilePhone",
@@ -356,44 +685,67 @@
             );
 
 
-            // Save profile picture if a new one was selected
+            // =====================================
+            // SAVE PROFILE PICTURE
+            // =====================================
 
             const file =
-                document.getElementById("profileImage").files[0];
+                document
+                    .getElementById("profileImage")
+                    .files[0];
 
 
             if (file) {
 
-                const reader = new FileReader();
 
-                reader.onload = function (event) {
+                const reader =
+                    new FileReader();
 
-                    localStorage.setItem(
-                        "profilePicture",
-                        event.target.result
-                    );
 
-                    alert("Profile updated successfully! 🌸");
+                reader.onload =
+                    function (event) {
 
-                    window.location.href = "profile.html";
 
-                };
+                        localStorage.setItem(
+                            "profilePicture",
+                            event.target.result
+                        );
+
+
+                        alert(
+                            "Profile updated successfully! 🌸"
+                        );
+
+
+                        window.location.href =
+                            "profile.html";
+
+                    };
+
 
                 reader.readAsDataURL(file);
+
 
             }
 
             else {
 
-                alert("Profile updated successfully! 🌸");
 
-                window.location.href = "profile.html";
+                alert(
+                    "Profile updated successfully! 🌸"
+                );
+
+
+                window.location.href =
+                    "profile.html";
 
             }
 
         }
 
     </script>
+
+
     <script src="js/theme.js"></script>
 
 </body>
