@@ -1351,48 +1351,56 @@
         // LOAD DASHBOARD
         // ==================================================
 
-        Promise.all([
-
-            loadProducts(),
-
-            loadOrders()
-
-        ])
-
+        loadProducts()
             .then(() => {
 
                 console.log(
-                    "Dashboard loaded successfully."
+                    "Products loaded successfully:",
+                    products.length
                 );
 
             })
-
             .catch(error => {
 
                 console.error(
-                    "Dashboard loading error:",
+                    "Product loading error:",
                     error
                 );
 
-
                 document.getElementById(
                     "totalProducts"
-                ).textContent = "—";
+                ).textContent = "0";
 
+            });
+
+
+        loadOrders()
+            .then(() => {
+
+                console.log(
+                    "Orders loaded successfully:",
+                    orders.length
+                );
+
+            })
+            .catch(error => {
+
+                console.error(
+                    "Order loading error:",
+                    error
+                );
 
                 document.getElementById(
                     "totalOrders"
-                ).textContent = "—";
-
+                ).textContent = "0";
 
                 document.getElementById(
                     "totalCustomers"
-                ).textContent = "—";
-
+                ).textContent = "0";
 
                 document.getElementById(
                     "totalRevenue"
-                ).textContent = "—";
+                ).textContent = "₹0";
 
             });
 
