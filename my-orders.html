@@ -235,7 +235,9 @@
 
         function loadOrders() {
 
-            fetch("https://affectionate-spontaneity-production-044d.up.railway.app/api/orders")
+            fetch(
+                "https://blushberry-backend.onrender.com/api/orders"
+            )
 
                 .then(response => {
 
@@ -339,25 +341,23 @@
                             order.productImage
                                 ?
                                 (
-                                    order.productImage.startsWith(
-                                        "uploads/"
-                                    )
+                                    order.productImage.startsWith("uploads/")
                                         ?
 
-                                        "https://affectionate-spontaneity-production-044d.up.railway.app/" +
-
+                                        "https://blushberry-backend.onrender.com/" +
                                         order.productImage
 
                                         :
 
-                                        "images/" +
-
-                                        order.productImage
+                                        order.productImage.startsWith("http")
+                                            ?
+                                            order.productImage
+                                            :
+                                            "images/" + order.productImage
                                 )
                                 :
 
                                 "images/pfp.jpg";
-
 
                         const productName =
                             order.productName ||
