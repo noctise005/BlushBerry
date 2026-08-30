@@ -8,12 +8,9 @@
 
     <title>Wishlist | BlushBerry</title>
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-
         body {
             background: #fffafc;
             font-family: Arial, sans-serif;
@@ -239,7 +236,6 @@
             color: #f83f76;
 
         }
-
     </style>
 
 </head>
@@ -257,9 +253,7 @@
         <div class="container">
 
 
-            <a
-                class="navbar-brand"
-                href="index.html">
+            <a class="navbar-brand" href="index.html">
 
                 🌸BlushBerry
 
@@ -269,18 +263,14 @@
             <div class="d-flex gap-2">
 
 
-                <a
-                    href="javascript:history.back()"
-                    class="bb-btn">
+                <a href="javascript:history.back()" class="bb-btn">
 
                     ← Go Back
 
                 </a>
 
 
-                <a
-                    href="products.html"
-                    class="bb-btn">
+                <a href="products.html" class="bb-btn">
 
                     Continue Shopping
 
@@ -302,18 +292,14 @@
     <div class="container mt-5">
 
 
-        <h2
-            class="mb-4"
-            style="color:#f83f76; font-weight:bold;">
+        <h2 class="mb-4" style="color:#f83f76; font-weight:bold;">
 
             ❤️ My Wishlist
 
         </h2>
 
 
-        <div
-            class="row"
-            id="wishlistContainer">
+        <div class="row" id="wishlistContainer">
 
         </div>
 
@@ -321,11 +307,11 @@
 
 
 
-    <!-- =========================
-         JAVASCRIPT
-         ========================= -->
-
+    ```html
     <script>
+
+        const BACKEND_URL =
+            "https://blushberry-backend.onrender.com";
 
 
         const wishlistContainer =
@@ -344,6 +330,68 @@
             ) || [];
 
 
+        /* =========================
+           GET IMAGE URL
+           ========================= */
+
+        function getImageUrl(image) {
+
+            if (!image) {
+                return "images/default-product.jpg";
+            }
+
+            image = image.trim();
+
+
+            // Full URL
+            if (
+                image.startsWith("http://") ||
+                image.startsWith("https://")
+            ) {
+                return image;
+            }
+
+
+            // Render uploaded image
+            if (
+                image.startsWith("uploads/")
+            ) {
+                return BACKEND_URL +
+                    "/" +
+                    image;
+            }
+
+
+            // /uploads/
+            if (
+                image.startsWith("/uploads/")
+            ) {
+                return BACKEND_URL +
+                    image;
+            }
+
+
+            // Frontend image
+            if (
+                image.startsWith("images/")
+            ) {
+                return image;
+            }
+
+
+            // /images/
+            if (
+                image.startsWith("/images/")
+            ) {
+                return image;
+            }
+
+
+            // Normal filename
+            return "images/" + image;
+        }
+
+
 
         /* =========================
            LOAD WISHLIST PRODUCTS
@@ -351,53 +399,53 @@
 
         async function loadWishlist() {
 
-
             /* EMPTY WISHLIST */
 
             if (wishlist.length === 0) {
 
                 wishlistContainer.innerHTML = `
 
-                    <div class="col-12">
+                <div class="col-12">
 
-                        <div class="empty-wishlist">
+                    <div class="empty-wishlist">
 
-                            <h4>
-                                ❤️ Your Wishlist is Empty
-                            </h4>
+                        <h4>
+                            ❤️ Your Wishlist is Empty
+                        </h4>
 
-                            <p>
-                                Add your favourite products
-                                by clicking the heart.
-                            </p>
+                        <p>
+                            Add your favourite products
+                            by clicking the heart.
+                        </p>
 
-                            <a
-                                href="products.html"
-                                class="bb-btn">
+                        <a
+                            href="products.html"
+                            class="bb-btn">
 
-                                Start Shopping
+                            Start Shopping
 
-                            </a>
-
-                        </div>
+                        </a>
 
                     </div>
 
-                `;
+                </div>
+
+            `;
 
                 return;
-
             }
 
 
             try {
 
-
-                /* GET PRODUCTS */
+                /* =========================
+                   GET PRODUCTS
+                   ========================= */
 
                 const response =
                     await fetch(
-                        "https://affectionate-spontaneity-production-044d.up.railway.app/api/products"
+                        BACKEND_URL +
+                        "/api/products"
                     );
 
 
@@ -414,8 +462,9 @@
                     await response.json();
 
 
-
-                /* FIND WISHLIST PRODUCTS */
+                /* =========================
+                   FIND WISHLIST PRODUCTS
+                   ========================= */
 
                 const wishlistProducts =
                     products.filter(
@@ -426,10 +475,7 @@
                     );
 
 
-                /* CLEAR */
-
                 wishlistContainer.innerHTML = "";
-
 
 
                 /* =========================
@@ -439,138 +485,84 @@
                 wishlistProducts.forEach(
                     product => {
 
+                        const imagePath =
+                            getImageUrl(
+                                product.image
+                            );
 
-                        /* IMAGE PATH */
-
-                        let imagePath;
-
-
-                        if (product.image) {
-
-
-                            if (
-                                product.image.startsWith(
-                                    "uploads/"
-                                )
-                            ) {
-
-                                imagePath ="https://affectionate-spontaneity-production-044d.up.railway.app/" +
-                                product.image;
-
-                            }
-
-                            else {
-
-                                imagePath =
-                                    "images/" +
-                                    product.image;
-
-                            }
-
-                        }
-
-                        else {
-
-                            imagePath =
-                                "images/default-product.jpg";
-
-                        }
-
-
-
-                        /* CARD */
 
                         const card = `
 
-                            <div
-                                class="col-md-4 mb-4"
-                                id="wishlist-${product.id}">
+                        <div
+                            class="col-md-4 mb-4"
+                            id="wishlist-${product.id}">
 
+                            <div
+                                class="card wishlist-card">
+
+                                <img
+                                    src="${imagePath}"
+                                    class="wishlist-img"
+                                    alt="${product.name}"
+
+                                    onerror="
+                                        this.onerror=null;
+                                        this.src='images/default-product.jpg';
+                                    "
+                                >
 
                                 <div
-                                    class="card wishlist-card">
+                                    class="card-body">
 
+                                    <h5>
+                                        ${product.name}
+                                    </h5>
 
-                                    <img
+                                    <p
+                                        class="text-muted">
 
-                                        src="${imagePath}"
+                                        ${product.brand || ""}
 
-                                        class="wishlist-img"
+                                    </p>
 
-                                        alt="${product.name}"
+                                    <p
+                                        class="price">
 
-                                        onerror="
-                                            this.onerror=null;
-                                            this.src='images/default-product.jpg';
-                                        "
+                                        ₹${product.price}
 
-                                    >
+                                    </p>
 
+                                    <button
+                                        class="btn btn-cart w-100 mb-2"
+                                        onclick="
+                                            addToCart(
+                                                ${product.id}
+                                            )
+                                        ">
 
-                                    <div
-                                        class="card-body">
+                                        🛒 Add to Cart
 
+                                    </button>
 
-                                        <h5>
+                                    <button
+                                        class="btn btn-remove w-100"
+                                        onclick="
+                                            removeFromWishlist(
+                                                ${product.id}
+                                            )
+                                        ">
 
-                                            ${product.name}
+                                        Remove from Wishlist
 
-                                        </h5>
-
-
-                                        <p
-                                            class="text-muted">
-
-                                            ${product.brand || ""}
-
-                                        </p>
-
-
-                                        <p
-                                            class="price">
-
-                                            ₹${product.price}
-
-                                        </p>
-
-
-                                        <button
-
-                                            class="btn btn-cart w-100 mb-2"
-
-                                            onclick="
-                                                addToCart(
-                                                    ${product.id}
-                                                )
-                                            ">
-
-                                            🛒 Add to Cart
-
-                                        </button>
-
-
-                                        <button
-
-                                            class="btn btn-remove w-100"
-
-                                            onclick="
-                                                removeFromWishlist(
-                                                    ${product.id}
-                                                )
-                                            ">
-
-                                            Remove from Wishlist
-
-                                        </button>
-
-
-                                    </div>
+                                    </button>
 
                                 </div>
 
                             </div>
 
-                        `;
+                        </div>
+
+                    `;
 
 
                         wishlistContainer.innerHTML +=
@@ -603,7 +595,9 @@
                 );
 
 
-                /* IF EVERYTHING WAS INVALID */
+                /* =========================
+                   IF EVERYTHING WAS INVALID
+                   ========================= */
 
                 if (
                     wishlistProducts.length === 0
@@ -611,37 +605,36 @@
 
                     wishlistContainer.innerHTML = `
 
-                        <div class="col-12">
+                    <div class="col-12">
 
-                            <div class="empty-wishlist">
+                        <div class="empty-wishlist">
 
-                                <h4>
-                                    ❤️ Your Wishlist is Empty
-                                </h4>
+                            <h4>
+                                ❤️ Your Wishlist is Empty
+                            </h4>
 
-                                <p>
-                                    Add your favourite
-                                    products from the Shop.
-                                </p>
+                            <p>
+                                Add your favourite
+                                products from the Shop.
+                            </p>
 
-                                <a
-                                    href="products.html"
-                                    class="bb-btn">
+                            <a
+                                href="products.html"
+                                class="bb-btn">
 
-                                    Start Shopping
+                                Start Shopping
 
-                                </a>
-
-                            </div>
+                            </a>
 
                         </div>
 
-                    `;
+                    </div>
 
+                `;
                 }
 
-
             }
+
 
             catch (error) {
 
@@ -653,25 +646,24 @@
 
                 wishlistContainer.innerHTML = `
 
-                    <div class="col-12">
+                <div class="col-12">
 
-                        <div class="empty-wishlist">
+                    <div class="empty-wishlist">
 
-                            <h4>
-                                ❌ Unable to Load Wishlist
-                            </h4>
+                        <h4>
+                            ❌ Unable to Load Wishlist
+                        </h4>
 
-                            <p>
-                                Please make sure
-                                Spring Boot is running.
-                            </p>
-
-                        </div>
+                        <p>
+                            Unable to connect to
+                            BlushBerry server.
+                        </p>
 
                     </div>
 
-                `;
+                </div>
 
+            `;
             }
 
         }
@@ -684,14 +676,20 @@
 
         async function addToCart(productId) {
 
-
             try {
-
 
                 const response =
                     await fetch(
-                        "https://affectionate-spontaneity-production-044d.up.railway.app/api/products"
+                        BACKEND_URL +
+                        "/api/products"
                     );
+
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Failed to load products"
+                    );
+                }
 
 
                 const products =
@@ -711,7 +709,6 @@
                     );
 
                     return;
-
                 }
 
 
@@ -759,8 +756,8 @@
                     " added to cart!"
                 );
 
-
             }
+
 
             catch (error) {
 
@@ -784,7 +781,6 @@
             productId
         ) {
 
-
             wishlist =
                 wishlist.filter(
                     id =>
@@ -805,18 +801,14 @@
 
 
             if (card) {
-
                 card.remove();
-
             }
 
 
             /* CHECK EMPTY */
 
             if (wishlist.length === 0) {
-
                 loadWishlist();
-
             }
 
         }
@@ -830,6 +822,8 @@
         loadWishlist();
 
     </script>
+    ```
+
 
 
     <script src="js/theme.js"></script>
