@@ -5,20 +5,16 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Add Product | BlushBerry</title>
 
 
     <!-- Bootstrap -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
     <style>
-
         /* =========================
            BODY
            ========================= */
@@ -447,7 +443,6 @@
             }
 
         }
-
     </style>
 
 </head>
@@ -469,9 +464,7 @@
 
         <div class="top-bar">
 
-            <a
-                href="admin-dashboard.html"
-                class="back-btn">
+            <a href="admin-dashboard.html" class="back-btn">
 
                 ← Go Back
 
@@ -509,12 +502,7 @@
 
                     </label>
 
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="productName"
-                        placeholder="Enter product name"
-                        required>
+                    <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
 
                 </div>
 
@@ -530,12 +518,7 @@
 
                     </label>
 
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="brand"
-                        placeholder="Enter brand name"
-                        required>
+                    <input type="text" class="form-control" id="brand" placeholder="Enter brand name" required>
 
                 </div>
 
@@ -551,10 +534,7 @@
 
                     </label>
 
-                    <select
-                        class="form-select"
-                        id="category"
-                        required>
+                    <select class="form-select" id="category" required>
 
                         <option value="Skincare">
 
@@ -602,13 +582,7 @@
 
                     </label>
 
-                    <input
-                        type="number"
-                        class="form-control"
-                        id="price"
-                        min="1"
-                        step="0.01"
-                        placeholder="Enter price"
+                    <input type="number" class="form-control" id="price" min="1" step="0.01" placeholder="Enter price"
                         required>
 
                 </div>
@@ -625,12 +599,7 @@
 
                     </label>
 
-                    <input
-                        type="file"
-                        class="form-control"
-                        id="imageFile"
-                        accept="image/*"
-                        required>
+                    <input type="file" class="form-control" id="imageFile" accept="image/*" required>
 
                     <small class="text-muted">
 
@@ -644,10 +613,7 @@
 
                 <!-- BUTTON -->
 
-                <button
-                    type="submit"
-                    class="btn btn-add w-100"
-                    id="addProductButton">
+                <button type="submit" class="btn btn-add w-100" id="addProductButton">
 
                     Add Product
 
@@ -827,19 +793,12 @@
 
                     const uploadResponse =
                         await fetch(
-
-                            "https://affectionate-spontaneity-production-044d.up.railway.app/api/products/upload-image",
-
+                            "https://blushberry-backend.onrender.com/api/products/upload-image",
                             {
-
                                 method: "POST",
-
                                 body: formData
-
                             }
-
                         );
-
 
 
                     if (!uploadResponse.ok) {
@@ -923,25 +882,16 @@
 
                     const productResponse =
                         await fetch(
-
-                            "https://affectionate-spontaneity-production-044d.up.railway.app/api/products",
-
+                            "https://blushberry-backend.onrender.com/api/products",
                             {
-
                                 method: "POST",
-
                                 headers: {
-
                                     "Content-Type":
                                         "application/json"
-
                                 },
-
                                 body:
                                     JSON.stringify(product)
-
                             }
-
                         );
 
 
