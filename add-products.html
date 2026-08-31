@@ -645,14 +645,22 @@
         const addProductForm =
             document.getElementById("addProductForm");
 
-
         const addProductButton =
             document.getElementById("addProductButton");
-
 
         const message =
             document.getElementById("message");
 
+
+        /* =========================
+           CLOUDINARY SETTINGS
+           ========================= */
+
+        const CLOUDINARY_CLOUD_NAME =
+            "x5rugcyv";
+
+        const CLOUDINARY_UPLOAD_PRESET =
+            "blushberry_products";
 
 
         /* =========================
@@ -666,17 +674,13 @@
             message.className = "";
 
             message.classList.add(
-
                 type === "success"
                     ? "success-message"
                     : "error-message"
-
             );
 
             message.style.display = "block";
-
         }
-
 
 
         /* =========================
@@ -684,13 +688,10 @@
            ========================= */
 
         addProductForm.addEventListener(
-
             "submit",
-
             async function (event) {
 
                 event.preventDefault();
-
 
 
                 /* =========================
@@ -719,11 +720,9 @@
 
                 const price =
                     parseFloat(
-
                         document
                             .getElementById("price")
                             .value
-
                     );
 
 
@@ -733,33 +732,25 @@
                         .files[0];
 
 
-
                 /* =========================
                    VALIDATION
                    ========================= */
 
                 if (
-
                     !productName ||
                     !brand ||
                     !category ||
                     !price ||
                     !imageFile
-
                 ) {
 
                     showMessage(
-
                         "Please fill all fields.",
-
                         "error"
-
                     );
 
                     return;
-
                 }
-
 
 
                 /* =========================
@@ -772,13 +763,11 @@
                     "Uploading Image...";
 
 
-
                 try {
-
 
                     /* =========================
                        STEP 1
-                       UPLOAD IMAGE
+                       UPLOAD IMAGE TO CLOUDINARY
                        ========================= */
 
                     const formData =
@@ -786,14 +775,20 @@
 
 
                     formData.append(
-                        "image",
+                        "file",
                         imageFile
                     );
 
 
-                    const uploadResponse =
+                    formData.append(
+                        "upload_preset",
+                        CLOUDINARY_UPLOAD_PRESET
+                    );
+
+
+                    const cloudinaryResponse =
                         await fetch(
-                            "https://blushberry-backend.onrender.com/api/products/upload-image",
+                            `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
                             {
                                 method: "POST",
                                 body: formData
@@ -801,57 +796,44 @@
                         );
 
 
-                    if (!uploadResponse.ok) {
+                    if (!cloudinaryResponse.ok) {
 
                         throw new Error(
-                            "Image upload failed."
+                            "Cloudinary image upload failed."
                         );
-
                     }
 
 
+                    const cloudinaryResult =
+                        await cloudinaryResponse.json();
 
-                    const uploadResult =
-                        await uploadResponse.json();
 
+                    console.log(
+                        "Cloudinary Result:",
+                        cloudinaryResult
+                    );
 
 
                     /* =========================
-                       GET IMAGE PATH
+                       GET CLOUDINARY IMAGE URL
                        ========================= */
 
-                    let imagePath;
+                    const imageUrl =
+                        cloudinaryResult.secure_url;
 
 
-                    if (
-                        typeof uploadResult === "string"
-                    ) {
-
-                        imagePath =
-                            uploadResult;
-
-                    }
-
-                    else {
-
-                        imagePath =
-                            uploadResult.image ||
-                            uploadResult.path ||
-                            uploadResult.fileName ||
-                            uploadResult.filename;
-
-                    }
-
-
-
-                    if (!imagePath) {
+                    if (!imageUrl) {
 
                         throw new Error(
-                            "Image path was not returned by server."
+                            "Cloudinary did not return an image URL."
                         );
-
                     }
 
+
+                    console.log(
+                        "Cloudinary Image URL:",
+                        imageUrl
+                    );
 
 
                     /* =========================
@@ -861,7 +843,6 @@
 
                     addProductButton.textContent =
                         "Saving Product...";
-
 
 
                     const product = {
@@ -874,10 +855,8 @@
 
                         price: price,
 
-                        image: imagePath
-
+                        image: imageUrl
                     };
-
 
 
                     const productResponse =
@@ -885,15 +864,16 @@
                             "https://blushberry-backend.onrender.com/api/products",
                             {
                                 method: "POST",
+
                                 headers: {
                                     "Content-Type":
                                         "application/json"
                                 },
+
                                 body:
                                     JSON.stringify(product)
                             }
                         );
-
 
 
                     if (!productResponse.ok) {
@@ -901,14 +881,11 @@
                         throw new Error(
                             "Failed to save product."
                         );
-
                     }
-
 
 
                     const savedProduct =
                         await productResponse.json();
-
 
 
                     console.log(
@@ -917,17 +894,13 @@
                     );
 
 
-
                     /* =========================
                        SUCCESS
                        ========================= */
 
                     showMessage(
-
                         "Product added successfully! 🎉",
-
                         "success"
-
                     );
 
 
@@ -941,28 +914,20 @@
                     addProductButton.disabled =
                         false;
 
-
                 }
 
 
                 catch (error) {
 
-
                     console.error(
-
                         "Error adding product:",
-
                         error
-
                     );
 
 
                     showMessage(
-
-                        "Unable to add product. Please make sure Spring Boot is running.",
-
+                        "Unable to add product. Please try again.",
                         "error"
-
                     );
 
 
@@ -972,11 +937,9 @@
 
                     addProductButton.disabled =
                         false;
-
                 }
 
             }
-
         );
 
     </script>
